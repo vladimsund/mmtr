@@ -1,0 +1,63 @@
+.task {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #303030;
+  padding: 20px;
+  border: 1px solid #ffffff;
+  border-radius: 10px;
+}
+
+.task__left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+  min-width: 0;
+}
+
+.task__input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #000;
+  color: #ffffff;
+  font-size: 20px;
+  outline: none;
+}
+
+.task__icon {
+  position: relative;
+  cursor: pointer;
+}
+
+.task__icon_status {
+  width: 50px;
+  height: 50px;
+}
+
+.task__name {
+  color: #ffffff;
+  font-size: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+
+.task__icons {
+  display: flex;
+  gap: 15px;
+}
+
+.task__icon_action {
+  width: 36px;
+  height: 36px;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.task:hover .task__icon_action {
+  opacity: 1;
+  visibility: visible;
+}
