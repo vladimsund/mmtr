@@ -1,0 +1,31 @@
+.title {
+  color: #ffffff;
+  font-size: 24px;
+}
+
+.newList {
+  color: #ffffff;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.itemBoard {
+  height: 90px;
+  background-color: #f2d59a;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 30px;
+  border: 1px solid #ffffff;
+  padding: 0px 30px;
+  color: #000000;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.itemName {
+  font-size: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

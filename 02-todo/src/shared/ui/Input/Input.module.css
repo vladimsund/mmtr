@@ -1,0 +1,22 @@
+.input {
+  width: 100%;
+  font-size: 20px;
+  outline: none;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.filled {
+  height: 50px;
+  background-color: #fafafa;
+  border-radius: 10px;
+  border: none;
+  padding: 0 24px;
+}
+
+.underlined {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #000;
+  padding: 4px 0;
+}

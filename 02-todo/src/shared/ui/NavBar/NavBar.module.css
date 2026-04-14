@@ -1,0 +1,22 @@
+.title {
+  color: #ffffff;
+  font-size: 24px;
+}
+
+.newList {
+  color: #ffffff;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.lists {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.textNew {
+  font-size: 24px;
+  color: #ffffff;
+  cursor: pointer;
+}
