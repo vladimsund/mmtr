@@ -1,11 +1,15 @@
 import { useState } from "react";
 
-import Input from "../Input/Input";
+import { Input, Button, Text } from "@/shared";
 
 import styles from "./Modal.module.css";
 
-export default function Modal({ onClose, onSave, title }) {
+export default function Modal({ isOpen = true, onClose, onSave, title }) {
   const [text, setText] = useState("");
+
+  if (!isOpen) {
+    return null;
+  }
 
   function handleKeyDown(event) {
     if (event.key === "Enter") {
@@ -24,7 +28,7 @@ export default function Modal({ onClose, onSave, title }) {
   return (
     <div className={styles.modal} onClick={onClose}>
       <div className={styles.modalContent} onClick={handleContentClick}>
-        <h3 className={styles.modalTitle}>{title}</h3>
+        <Text text={title} className={styles.modalTitle} />
         <div className={styles.modalInputContainer} onKeyDown={handleKeyDown}>
           <Input
             value={text}
@@ -33,12 +37,16 @@ export default function Modal({ onClose, onSave, title }) {
           />
         </div>
         <div className={styles.modalActions}>
-          <button onClick={handleSaveClick} className={styles.modalBtnSave}>
-            Сохранить
-          </button>
-          <button onClick={onClose} className={styles.modalBtnCancel}>
-            Отмена
-          </button>
+          <Button
+            text="Сохранить"
+            onClick={handleSaveClick}
+            className={styles.modalBtnSave}
+          ></Button>
+          <Button
+            text="Отмена"
+            onClick={onClose}
+            className={styles.modalBtnCancel}
+          ></Button>
         </div>
       </div>
     </div>

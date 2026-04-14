@@ -1,0 +1,41 @@
+.container {
+  width: 100%;
+  min-height: calc(100vh - 100px);
+  display: flex;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 390px;
+  background-color: #303030;
+  padding: 30px;
+}
+
+.title {
+  color: #ffffff;
+  font-size: 24px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+
+.listItem {
+  cursor: pointer;
+}
+
+.new {
+  font-size: 24px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.right {
+  flex-grow: 1;
+}

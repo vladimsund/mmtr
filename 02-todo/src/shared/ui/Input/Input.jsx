@@ -9,10 +9,16 @@ export default function Input({
   className,
   ...props
 }) {
+  function handleChange(e) {
+    if (onChange) {
+      onChange(e.target.value);
+    }
+  }
+
   return (
     <input
       value={value}
-      onChange={(e) => onChange(e.target.value)}
+      onChange={handleChange}
       className={clsx(styles.input, styles[variant], className)}
       {...props}
     />

@@ -1,1 +1,0 @@
-export { MyBoard } from "./ui";

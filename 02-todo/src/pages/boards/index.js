@@ -1,1 +1,1 @@
-export { Boards } from "./ui";
+export { BoardsPage } from "./ui";

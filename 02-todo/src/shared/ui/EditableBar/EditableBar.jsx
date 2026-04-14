@@ -1,7 +1,8 @@
 import { useState } from "react";
 import clsx from "clsx";
 
-import { Input, penDark, crossDark } from "@/shared";
+import { penDark, crossDark } from "@/shared/assets";
+import { Input, Icon, Text } from "@/shared/ui";
 
 import styles from "./EditableBar.module.css";
 
@@ -13,16 +14,8 @@ export default function EditableBar({ id, title, onEdit, onDelete, onClick }) {
     onClick(id);
   }
 
-  function handleSave(e) {
-    if (e) {
-      stopPropagation(e);
-    }
-
-    const trimmedValue = value.trim();
-    if (trimmedValue && trimmedValue !== title) {
-      onEdit(id, trimmedValue);
-    }
-
+  function handleSave() {
+    onEdit(id, value);
     setIsEditing(false);
   }
 
@@ -61,15 +54,21 @@ export default function EditableBar({ id, title, onEdit, onDelete, onClick }) {
           onKeyDown={handleKeyDown}
         />
       ) : (
-        <span className={styles.name}>{title}</span>
+        <Text text={title} className={styles.name} />
       )}
       <div className={styles.icons}>
-        <div className={styles.iconContainer} onClick={handleEdit}>
-          <img src={penDark} alt="edit" className={styles.icon} />
-        </div>
-        <div className={styles.iconContainer} onClick={handleDelete}>
-          <img src={crossDark} alt="delete" className={styles.icon} />
-        </div>
+        <Icon
+          src={penDark}
+          alt="edit"
+          onClick={handleEdit}
+          className={styles.iconContainer}
+        />
+        <Icon
+          src={crossDark}
+          alt="delete"
+          onClick={handleDelete}
+          className={styles.iconContainer}
+        />
       </div>
     </div>
   );

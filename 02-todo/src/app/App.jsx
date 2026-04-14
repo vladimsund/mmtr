@@ -1,9 +1,20 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
 import { BoardProvider } from "@/entities";
-import { Auth, Boards, Register, MyBoard } from "@/pages";
 import { Header } from "@/widgets";
 import { ROUTES } from "@/shared";
+import {
+  AuthPage,
+  BoardsPage,
+  RegisterPage,
+  BoardPage,
+  NotFoundPage,
+} from "@/pages";
 
 function App() {
   return (
@@ -11,11 +22,12 @@ function App() {
       <Router>
         <Header />
         <Routes>
-          <Route path="/" element={<Auth />} />
-          <Route path={ROUTES.AUTH} element={<Auth />} />
-          <Route path={ROUTES.REGISTER} element={<Register />} />
-          <Route path={ROUTES.BOARDS} element={<Boards />} />
-          <Route path={ROUTES.MY_BOARD} element={<MyBoard />} />
+          <Route path={ROUTES.HOME} element={<Navigate to={ROUTES.AUTH} />} />
+          <Route path={ROUTES.AUTH} element={<AuthPage />} />
+          <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
+          <Route path={ROUTES.BOARDS} element={<BoardsPage />} />
+          <Route path={ROUTES.MY_BOARD} element={<BoardPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Router>
     </BoardProvider>

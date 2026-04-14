@@ -1,7 +1,9 @@
-export { Auth } from "./auth";
+export * from "./auth";
 
-export { Boards } from "./boards";
+export * from "./boards";
 
-export { Register } from "./register";
+export * from "./register";
 
-export { MyBoard } from "./my-board";
+export * from "./board";
+
+export * from "./notFound";

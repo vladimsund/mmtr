@@ -1,0 +1,50 @@
+.task {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #303030;
+  padding: 20px;
+  border: 1px solid #ffffff;
+  border-radius: 10px;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+  min-width: 0;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.name {
+  color: #ffffff;
+  font-size: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+
+.icons {
+  display: flex;
+  gap: 15px;
+}
+
+.iconAction {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.task:hover .iconAction {
+  opacity: 1;
+  visibility: visible;
+}
