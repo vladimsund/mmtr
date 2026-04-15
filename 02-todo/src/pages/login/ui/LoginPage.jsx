@@ -1,10 +1,10 @@
-import useAuthPage from "../model/useAuthPage";
+import useAuthPage from "../model/useLoginPage";
 
 import { Field, Text, Button, ErrorForm } from "@/shared";
 
-import styles from "./AuthPage.module.css";
+import styles from "./LoginPage.module.css";
 
-export default function AuthPage() {
+export default function LoginPage() {
   const {
     form,
     errors,

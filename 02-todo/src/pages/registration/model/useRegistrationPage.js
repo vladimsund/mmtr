@@ -4,29 +4,28 @@ import { useNavigate } from "react-router-dom";
 import { ROUTES } from "@/shared";
 import { useAuth } from "@/entities/user";
 
-export default function useRegisterPage() {
-  const { register, validateLogin, validateEmail, validatePassword } =
-    useAuth();
+export default function useRegistrationPage() {
+  const { register, validateName, validateEmail, validatePassword } = useAuth();
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
-    login: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    name: "vladimsund",
+    email: "vladimsov@gmail.com",
+    password: "Vladimsund123",
+    confirmPassword: "Vladimsund123",
   });
 
   const [errors, setErrors] = useState({
-    login: "",
+    name: "",
     email: "",
     password: "",
     api: "",
   });
 
-  function handleChangeLogin(val) {
+  function handleChangeName(val) {
     setForm((prev) => ({ ...prev, login: val }));
     setErrors((prev) => ({ ...prev, login: "", api: "" }));
-    validateLogin();
+    validateName();
   }
 
   function handleChangeEmail(val) {
@@ -47,7 +46,11 @@ export default function useRegisterPage() {
   }
 
   function handleRegisterClick() {
-    register();
+    register({
+      email: form.email,
+      password: form.password,
+      name: form.name,
+    });
   }
 
   function handleNavigateTo() {
@@ -57,7 +60,7 @@ export default function useRegisterPage() {
   return {
     form,
     errors,
-    handleChangeLogin,
+    handleChangeName,
     handleChangeEmail,
     handleChangePassword,
     handleChangeConfirm,

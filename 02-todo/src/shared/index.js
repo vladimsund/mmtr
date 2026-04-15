@@ -11,3 +11,5 @@ export { ErrorForm } from "./ui";
 export { ROUTES } from "./config/routes";
 
 export * from "./assets";
+
+export { client } from "./api";

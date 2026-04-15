@@ -1,14 +1,14 @@
-import useRegisterPage from "../model/useRegisterPage";
+import useRegisterPage from "../model/useRegistrationPage";
 
 import { Field, Text, Button, ErrorForm } from "@/shared";
 
-import styles from "./RegisterPage.module.css";
+import styles from "./RegistrationPage.module.css";
 
-export default function RegisterPage() {
+export default function RegistrationPage() {
   const {
     form,
     errors,
-    handleChangeLogin,
+    handleChangeName,
     handleChangeEmail,
     handleChangePassword,
     handleChangeConfirm,
@@ -21,9 +21,9 @@ export default function RegisterPage() {
       <Text text={"Создайте аккаунт"} className={styles.title} />
       <div className={styles.form}>
         <Field
-          label="Логин"
-          value={form.login}
-          onChange={handleChangeLogin}
+          label="Имя"
+          value={form.name}
+          onChange={handleChangeName}
           error={errors.login}
           placeholder="vladimund"
         />
