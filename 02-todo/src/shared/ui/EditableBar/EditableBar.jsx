@@ -11,11 +11,13 @@ export default function EditableBar({ id, title, onEdit, onDelete, onClick }) {
   const [value, setValue] = useState(title);
 
   function handleClick() {
-    onClick(id);
+    if (onClick) {
+      onClick(id);
+    }
   }
 
   function handleSave() {
-    onEdit(id, value);
+    onEdit(value, id);
     setIsEditing(false);
   }
 

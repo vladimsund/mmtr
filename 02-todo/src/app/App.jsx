@@ -5,9 +5,7 @@ import {
   Navigate,
 } from "react-router-dom";
 
-import { BoardProvider } from "@/entities";
-import { Header } from "@/widgets";
-import { ROUTES } from "@/shared";
+import { ROUTES, Header } from "@/shared";
 import {
   LoginPage,
   BoardsPage,
@@ -16,21 +14,35 @@ import {
   NotFoundPage,
 } from "@/pages";
 
+import { AuthProvider } from "./provider";
+
 function App() {
   return (
-    <BoardProvider>
-      <Router>
-        <Header />
-        <Routes>
-          <Route path={ROUTES.HOME} element={<Navigate to={ROUTES.AUTH} />} />
-          <Route path={ROUTES.AUTH} element={<LoginPage />} />
-          <Route path={ROUTES.REGISTER} element={<RegistrationPage />} />
-          <Route path={ROUTES.BOARDS} element={<BoardsPage />} />
-          <Route path={ROUTES.MY_BOARD} element={<BoardPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </Router>
-    </BoardProvider>
+    <Router>
+      <Header />
+      <Routes>
+        <Route path={ROUTES.HOME} element={<Navigate to={ROUTES.AUTH} />} />
+        <Route path={ROUTES.AUTH} element={<LoginPage />} />
+        <Route path={ROUTES.REGISTER} element={<RegistrationPage />} />
+        <Route
+          path={ROUTES.BOARDS}
+          element={
+            <AuthProvider>
+              <BoardsPage />
+            </AuthProvider>
+          }
+        />
+        <Route
+          path={ROUTES.MY_BOARD}
+          element={
+            <AuthProvider>
+              <BoardPage />
+            </AuthProvider>
+          }
+        />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </Router>
   );
 }
 

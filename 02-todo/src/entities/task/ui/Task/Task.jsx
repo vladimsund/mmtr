@@ -5,13 +5,25 @@ import { Input, Icon, Text } from "@/shared/ui";
 
 import styles from "./Task.module.css";
 
-export default function Task({ title, isActive, onChange, onEdit, onDelete }) {
+export default function Task({ task, list, onChange, onEdit, onDelete }) {
   const [isEditing, setIsEditing] = useState(false);
-  const [value, setValue] = useState(title);
+  const [value, setValue] = useState(task.name);
 
   function handleSave() {
-    onEdit(value);
+    handleEdit(value);
     setIsEditing(false);
+  }
+
+  function handleChange() {
+    onChange(task.id, list.id, task.name, !task.isActive);
+  }
+
+  function handleEdit(name) {
+    onEdit(task.id, list.id, name, task.isActive);
+  }
+
+  function handleDelete() {
+    onDelete(task.id, list.id);
   }
 
   function handleKeyDown(e) {
@@ -32,9 +44,9 @@ export default function Task({ title, isActive, onChange, onEdit, onDelete }) {
     <div className={styles.task}>
       <div className={styles.left}>
         <Icon
-          src={isActive ? circleActive : circle}
+          src={task.isActive ? circleActive : circle}
           alt="status"
-          onClick={onChange}
+          onClick={handleChange}
           className={styles.icon}
         />
         {isEditing ? (
@@ -47,7 +59,7 @@ export default function Task({ title, isActive, onChange, onEdit, onDelete }) {
             onKeyDown={handleKeyDown}
           />
         ) : (
-          <Text text={title} className={styles.name} />
+          <Text text={task.name} className={styles.name} />
         )}
       </div>
       <div className={styles.icons} onClick={stopPropagation}>
@@ -60,7 +72,7 @@ export default function Task({ title, isActive, onChange, onEdit, onDelete }) {
         <Icon
           src={crossWhite}
           alt="delete"
-          onClick={onDelete}
+          onClick={handleDelete}
           className={styles.iconAction}
         />
       </div>

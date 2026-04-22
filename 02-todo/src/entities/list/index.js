@@ -1,3 +1,3 @@
-export { default as useList } from "./model/useList";
+export * from "./model";
 
-export { BoardList } from "./ui/BoardList";
+export * from "./ui";

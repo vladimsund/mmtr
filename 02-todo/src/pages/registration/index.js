@@ -1,3 +1,1 @@
-export { RegistrationPage } from "./ui";
-
-export { default as registration } from "./api/registration";
+export { default as RegistrationPage } from "./RegistrationPage";
