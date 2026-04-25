@@ -1,3 +1,3 @@
-export { default as useTask } from "./model/useTask";
+export * from "./model";
 
-export { Task } from "./ui/Task";
+export * from "./ui";

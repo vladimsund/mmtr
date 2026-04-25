@@ -1,0 +1,49 @@
+.form {
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background-color: #ffffff;
+}
+
+.field {
+  width: 100%;
+}
+
+.label {
+  text-align: left;
+  font-size: 26px;
+  color: #6f6f6f;
+}
+
+.button {
+  height: 50px;
+  background-color: #00b140;
+  font-size: 26px;
+  color: #ffffff;
+  cursor: pointer;
+  border-radius: 10px;
+  border: none;
+}
+
+.button:hover {
+  text-decoration: underline;
+}
+
+.hint {
+  font-size: 20px;
+}
+
+.accountText {
+  opacity: 0.5;
+}
+
+.registerLink {
+  color: #00b140;
+  cursor: pointer;
+}
+
+.registerLink:hover {
+  text-decoration: underline;
+}

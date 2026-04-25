@@ -1,45 +1,30 @@
-import { useBoardContext } from "@/entities";
+import { useSelector, useDispatch } from "react-redux";
+
+import { fetchBoards, addBoard, editBoard, deleteBoard } from "../../api";
+import { allBoards } from "../selectors";
 
 export default function useBoard() {
-  const { boards, setBoards } = useBoardContext();
+  const dispatch = useDispatch();
 
-  function editBoard(id, name) {
-    const updatedBoards = [];
-    for (let i = 0; i < boards.length; i++) {
-      if (boards[i].id === id) {
-        updatedBoards.push({ ...boards[i], name: name });
-      } else {
-        updatedBoards.push(boards[i]);
-      }
-    }
-    setBoards(updatedBoards);
+  const boards = useSelector(allBoards);
+
+  async function handleSave(name) {
+    await dispatch(addBoard({ name }));
+    dispatch(fetchBoards());
   }
 
-  function deleteBoard(id) {
-    const filteredBoards = [];
-    for (let i = 0; i < boards.length; i++) {
-      if (boards[i].id !== id) {
-        filteredBoards.push(boards[i]);
-      }
-    }
-    setBoards(filteredBoards);
+  function handleEdit(name, boardId) {
+    dispatch(editBoard({ boardId, name }));
   }
 
-  function saveBoard(text) {
-    const nextId = Date.now();
-    const newBoard = { id: nextId, name: text, lists: [] };
-    const newBoardsList = [];
-    for (let i = 0; i < boards.length; i++) {
-      newBoardsList.push(boards[i]);
-    }
-    newBoardsList.push(newBoard);
-    setBoards(newBoardsList);
+  function handleDelete(boardId) {
+    dispatch(deleteBoard({ boardId: boardId }));
   }
 
   return {
     boards,
-    editBoard,
-    deleteBoard,
-    saveBoard,
+    handleSave,
+    handleEdit,
+    handleDelete,
   };
 }

@@ -1,8 +1,8 @@
-export * from "./auth";
+export * from "./login";
 
 export * from "./boards";
 
-export * from "./register";
+export * from "./registration";
 
 export * from "./board";
 

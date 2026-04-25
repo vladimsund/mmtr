@@ -7,31 +7,33 @@ export default function NavBar({
   elements,
   onEdit,
   onDelete,
-  onClick,
+  onClick = () => {},
   titleAdd,
   onAdd,
 }) {
-  const newElements = [];
-  for (let i = 0; i < elements.length; i++) {
-    const item = elements[i];
-    if (item.title === undefined) {
-      newElements.push({ ...item, title: item.name });
-    } else {
-      newElements.push(item);
-    }
+  function handleEdit(name, id) {
+    return onEdit(name, id);
+  }
+
+  function handleDelete(id) {
+    return onDelete(id);
+  }
+
+  function handleClick(id) {
+    return onClick(id);
   }
 
   return (
     <div className={styles.lists}>
       <Text text={title} className={styles.title}></Text>
-      {newElements.map((element) => (
+      {elements.map((element) => (
         <EditableBar
           key={element.id}
           id={element.id}
-          title={element.title}
-          onEdit={(id, text) => onEdit(id, text)}
-          onDelete={(id) => onDelete(id)}
-          onClick={(id) => onClick(id)}
+          title={element.name}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+          onClick={handleClick}
         />
       ))}
       <Text onClick={onAdd} text={titleAdd} className={styles.textNew}></Text>

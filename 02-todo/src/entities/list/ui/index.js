@@ -1,1 +1,1 @@
-export { BoardList } from "./BoardList";
+export { ListNavigation } from "./ListNavigation";
