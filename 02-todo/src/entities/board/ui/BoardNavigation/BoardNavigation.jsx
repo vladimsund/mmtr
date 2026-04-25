@@ -5,7 +5,7 @@ import { NavBar } from "@/shared/ui";
 import { useBoard } from "@/entities/board";
 
 export default function BoardNavigation({ handleOpenModal }) {
-  const { boards, handleEdit, handleDelete } = useBoard();
+  const board = useBoard();
 
   const navigate = useNavigate();
 
@@ -16,9 +16,9 @@ export default function BoardNavigation({ handleOpenModal }) {
   return (
     <NavBar
       title="Мои доски"
-      elements={boards}
-      onEdit={handleEdit}
-      onDelete={handleDelete}
+      elements={board.boards}
+      onEdit={board.handleEdit}
+      onDelete={board.handleDelete}
       onClick={handleClick}
       onAdd={handleOpenModal}
       titleAdd="+ Добавить доску"

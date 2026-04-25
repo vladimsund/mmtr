@@ -1,40 +1,30 @@
 import { useSelector, useDispatch } from "react-redux";
 
-import { allLists } from "@/entities/list";
-
-import { allTasks } from "../selectors/taskSelector";
-import { addTask, editTask, deleteTask } from "../slices/taskSlice";
+import { allTasks } from "../selectors";
+import { fetchTasks, addTask, editTask, deleteTask } from "../../api";
 
 export default function useTask(boardId) {
   const dispatch = useDispatch();
 
-  const lists = useSelector(allLists);
   const tasks = useSelector(allTasks);
 
-  const listsWithTasks = [];
-  for (let i = 0; i < lists.length; i++) {
-    listsWithTasks[i] = { ...lists[i] };
-    listsWithTasks[i].tasks = tasks.filter(
-      (task) => task.listId === lists[i].id,
-    );
-  }
-
-  function handleEditTask(taskId, listId, name, isActive) {
+  function handleEdit(taskId, listId, name, isActive) {
     dispatch(editTask({ boardId, listId, taskId, isActive, name }));
   }
 
-  function handleDeleteTask(taskId, listId) {
+  function handleDelete(taskId, listId) {
     dispatch(deleteTask({ boardId, listId, taskId }));
   }
 
-  function handleAddTask(boardId, listId, name) {
-    dispatch(addTask({ boardId, listId, name }));
+  async function handleSave(boardId, listId, name) {
+    await dispatch(addTask({ boardId, listId, name }));
+    dispatch(fetchTasks({ boardId, listId }));
   }
 
   return {
-    lists: listsWithTasks,
-    handleAddTask,
-    handleEditTask,
-    handleDeleteTask,
+    tasks,
+    handleSave,
+    handleEdit,
+    handleDelete,
   };
 }

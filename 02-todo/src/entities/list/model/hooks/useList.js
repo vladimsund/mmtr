@@ -1,34 +1,30 @@
-import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { allLists } from "../selectors/listSelector";
-import { fetchLists, addList, editList, deleteList } from "../slices/listSlice";
+import { allLists } from "../selectors";
+import { fetchLists, addList, editList, deleteList } from "../../api";
 
 export default function useList(boardId) {
   const dispatch = useDispatch();
 
   const lists = useSelector(allLists);
 
-  useEffect(() => {
+  async function handleSave(name, boardId) {
+    await dispatch(addList({ name, boardId }));
     dispatch(fetchLists({ boardId }));
-  }, [dispatch, boardId]);
-
-  function handleAddList(name, boardId) {
-    dispatch(addList({ name, boardId }));
   }
 
-  function handleEditList(name, listId) {
+  function handleEdit(name, listId) {
     dispatch(editList({ name, boardId, listId }));
   }
 
-  function handleDeleteList(listId) {
+  function handleDelete(listId) {
     dispatch(deleteList({ boardId, listId }));
   }
 
   return {
     lists,
-    handleAddList,
-    handleEditList,
-    handleDeleteList,
+    handleSave,
+    handleEdit,
+    handleDelete,
   };
 }

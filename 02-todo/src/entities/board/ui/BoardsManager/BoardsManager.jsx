@@ -1,11 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 
-import { BoardNavigation, BoardModalCreate } from "@/entities/board";
+import { BoardNavigation, BoardModalCreate } from "../";
+import { fetchBoards } from "../../api";
 
 import styles from "./BoardsManager.module.css";
 
 export default function BoardsManager() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchBoards());
+  }, [dispatch]);
 
   function handleOpenModal() {
     setIsModalOpen(true);

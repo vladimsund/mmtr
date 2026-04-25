@@ -1,6 +1,6 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-import * as authApi from "../../api/user";
+import * as authApi from "../../api";
 
 const KEY_TOKEN = "token";
 const KEY_NAME = "name";
@@ -9,30 +9,6 @@ const initialState = {
   token: getToken(),
   name: getName(),
 };
-
-export const register = createAsyncThunk(
-  "user/register",
-  async (data, { rejectWithValue }) => {
-    try {
-      const response = await authApi.register(data);
-      return response;
-    } catch (err) {
-      return rejectWithValue(err.response?.data);
-    }
-  },
-);
-
-export const login = createAsyncThunk(
-  "user/login",
-  async (data, { rejectWithValue }) => {
-    try {
-      const response = await authApi.login(data);
-      return response;
-    } catch (err) {
-      return rejectWithValue(err.response?.data);
-    }
-  },
-);
 
 const userSlice = createSlice({
   name: "user",
@@ -43,11 +19,14 @@ const userSlice = createSlice({
       const name = getName();
       saveTokenName(state, token, name);
     },
+    logout: (state) => {
+      saveTokenName(state, null, null);
+    },
   },
   extraReducers(builder) {
     builder
-      .addCase(register.fulfilled, handleSaveUserState)
-      .addCase(login.fulfilled, handleSaveUserState);
+      .addCase(authApi.register.fulfilled, handleSaveUserState)
+      .addCase(authApi.login.fulfilled, handleSaveUserState);
   },
 });
 
@@ -78,5 +57,5 @@ function saveTokenName(state, token, name) {
   state.name = name;
 }
 
-export const { refreshAuth } = userSlice.actions;
+export const { refreshAuth, logout } = userSlice.actions;
 export default userSlice.reducer;

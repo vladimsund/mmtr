@@ -1,41 +1,18 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-import { deleteList } from "@/entities/list";
-import { deleteBoard } from "@/entities/board";
+import { deleteList } from "@/entities/list/api";
+import { deleteBoard } from "@/entities/board/api";
 
-import * as taskApi from "../../api/task";
+import * as taskApi from "../../api";
 
 const initialState = { tasks: [] };
-
-export const fetchTasks = createAsyncThunk("tasks/fetchTasks", async (data) => {
-  const response = await taskApi.tasks(data);
-  return response.data;
-});
-
-export const addTask = createAsyncThunk(
-  "tasks/addTask",
-  async (data, { dispatch }) => {
-    await taskApi.createTask(data);
-    dispatch(fetchTasks(data));
-  },
-);
-
-export const deleteTask = createAsyncThunk("tasks/deleteTask", async (data) => {
-  await taskApi.deleteTask(data);
-  return data;
-});
-
-export const editTask = createAsyncThunk("tasks/editTask", async (data) => {
-  await taskApi.editTask(data);
-  return data;
-});
 
 const tasksSlice = createSlice({
   name: "tasks",
   initialState,
   extraReducers(builder) {
     builder
-      .addCase(fetchTasks.fulfilled, (state, action) => {
+      .addCase(taskApi.fetchTasks.fulfilled, (state, action) => {
         const newTasks = action.payload;
         newTasks.forEach((newTask) => {
           const exists = state.tasks.find((t) => t.id === newTask.id);
@@ -44,17 +21,15 @@ const tasksSlice = createSlice({
           }
         });
       })
-      .addCase(deleteTask.fulfilled, (state, action) => {
+      .addCase(taskApi.deleteTask.fulfilled, (state, action) => {
         const id = action.payload.taskId;
         state.tasks = state.tasks.filter((task) => task.id !== id);
       })
-      .addCase(editTask.fulfilled, (state, action) => {
+      .addCase(taskApi.editTask.fulfilled, (state, action) => {
         const { name, taskId, isActive } = action.payload;
         const findTask = state.tasks.find((task) => task.id === taskId);
-        if (findTask) {
-          findTask.name = name;
-          findTask.isActive = isActive;
-        }
+        findTask.name = name;
+        findTask.isActive = isActive;
       })
       .addCase(deleteList.fulfilled, (state, action) => {
         const { listId } = action.payload;

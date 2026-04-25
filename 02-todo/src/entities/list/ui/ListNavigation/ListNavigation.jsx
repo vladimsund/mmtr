@@ -6,16 +6,16 @@ import { NavBar } from "@/shared";
 
 export default function ListNavigation({ onAddList }) {
   const { id: boardId } = useParams();
-  const { lists, handleEditList, handleDeleteList } = useList(boardId);
+  const list = useList(boardId);
 
   return (
     <div>
       <BoardLabel />
       <NavBar
         title="Мои списки"
-        elements={lists}
-        onEdit={handleEditList}
-        onDelete={handleDeleteList}
+        elements={list.lists}
+        onEdit={list.handleEdit}
+        onDelete={list.handleDelete}
         titleAdd="+ Добавить список"
         onAdd={onAddList}
       />

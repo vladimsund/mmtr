@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router";
+import { useDispatch } from "react-redux";
 
+import { fetchBoards } from "@/entities/board/api";
+import { fetchLists } from "@/entities/list/api";
 import { ListNavigation, useList } from "@/entities/list";
+import { fetchTasks } from "@/entities/task/api";
 import { TaskPanel, useTask } from "@/entities/task";
 import { Modal } from "@/shared";
 
@@ -9,11 +13,27 @@ import styles from "./TaskManager.module.css";
 
 export default function TaskManager() {
   const { id: boardId } = useParams();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeListId, setActiveListId] = useState(null);
 
-  const { handleAddList } = useList(boardId);
-  const { handleAddTask } = useTask(boardId);
+  const dispatch = useDispatch();
+
+  const list = useList(boardId);
+  const task = useTask(boardId);
+
+  useEffect(() => {
+    const sync = async () => {
+      await dispatch(fetchBoards());
+      const lists = await dispatch(fetchLists({ boardId })).unwrap();
+
+      for (let i = 0; i < lists.length; i++) {
+        dispatch(fetchTasks({ boardId, listId: lists[i].id }));
+      }
+    };
+
+    sync();
+  }, [dispatch, boardId]);
 
   function openAddListModal() {
     setActiveListId(null);
@@ -35,10 +55,11 @@ export default function TaskManager() {
 
   function handleSave(name) {
     if (activeListId) {
-      handleAddTask(boardId, activeListId, name);
+      task.handleSave(boardId, activeListId, name);
     } else {
-      handleAddList(name, boardId);
+      list.handleSave(name, boardId);
     }
+
     closeModal();
   }
 

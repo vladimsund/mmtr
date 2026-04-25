@@ -2,10 +2,10 @@ import { Modal } from "@/shared/ui";
 import { useBoard } from "@/entities/board";
 
 export default function CreateBoardModal({ isOpen, handleCloseModal }) {
-  const { handleSave } = useBoard();
+  const board = useBoard();
 
   function saveBoard(name) {
-    handleSave(name);
+    board.handleSave(name);
     handleCloseModal();
   }
 

@@ -1,13 +1,15 @@
-import { Link, useLocation } from "react-router-dom";
 import clsx from "clsx";
+import { Link, useLocation } from "react-router-dom";
 
-import { ROUTES } from "@/shared";
-import { home, homeActive } from "@/shared";
+import { useUser } from "@/entities/user";
+import { ROUTES } from "@/shared/constants";
+import { home, homeActive } from "@/shared/assets";
 
 import styles from "./Header.module.css";
 
 export default function Header() {
   const { pathname } = useLocation();
+  const { handleLogout, isUserAuth } = useUser();
 
   const isHomeActive =
     pathname === ROUTES.BOARDS || pathname.startsWith("/board/");
@@ -20,26 +22,38 @@ export default function Header() {
         <Link to={ROUTES.BOARDS} className={clsx(styles.link, styles.linkLogo)}>
           <img src={homeIcon} alt="Главная" className={styles.image} />
         </Link>
-        <Link
-          to={ROUTES.AUTH}
-          className={clsx(
-            styles.link,
-            styles.linkButton,
-            pathname === ROUTES.AUTH && styles.linkActive,
-          )}
-        >
-          Авторизация
-        </Link>
-        <Link
-          to={ROUTES.REGISTER}
-          className={clsx(
-            styles.link,
-            styles.linkButton,
-            pathname === ROUTES.REGISTER && styles.linkActive,
-          )}
-        >
-          Регистрация
-        </Link>
+        {!isUserAuth ? (
+          <>
+            <Link
+              to={ROUTES.AUTH}
+              className={clsx(
+                styles.link,
+                styles.linkButton,
+                pathname === ROUTES.AUTH && styles.linkActive,
+              )}
+            >
+              Авторизация
+            </Link>
+            <Link
+              to={ROUTES.REGISTER}
+              className={clsx(
+                styles.link,
+                styles.linkButton,
+                pathname === ROUTES.REGISTER && styles.linkActive,
+              )}
+            >
+              Регистрация
+            </Link>
+          </>
+        ) : (
+          <Link
+            to={ROUTES.AUTH}
+            className={clsx(styles.link, styles.linkButton)}
+            onClick={handleLogout}
+          >
+            Выйти
+          </Link>
+        )}
       </nav>
     </header>
   );

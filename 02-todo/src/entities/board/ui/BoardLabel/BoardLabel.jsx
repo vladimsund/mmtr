@@ -15,10 +15,14 @@ export default function BoardLabel() {
     const board = boards.find((b) => b.id === boardId);
 
     if (!board) {
-      return "";
+      return;
     }
 
     return board.name;
+  }
+
+  if (!boardName) {
+    return;
   }
 
   return (

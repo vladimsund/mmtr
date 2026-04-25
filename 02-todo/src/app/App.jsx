@@ -21,7 +21,7 @@ function App() {
     <Router>
       <Header />
       <Routes>
-        <Route path={ROUTES.HOME} element={<Navigate to={ROUTES.AUTH} />} />
+        <Route path={ROUTES.HOME} element={<Navigate to={ROUTES.BOARDS} />} />
         <Route path={ROUTES.AUTH} element={<LoginPage />} />
         <Route path={ROUTES.REGISTER} element={<RegistrationPage />} />
         <Route

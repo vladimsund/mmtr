@@ -7,7 +7,7 @@ import { useUser } from "@/entities/user";
 
 export default function useRegistrationPage() {
   const navigate = useNavigate();
-  const { handleRegister, getEmailError, getPasswordError } = useUser();
+  const user = useUser();
 
   const [form, setForm] = useState({
     name: "",
@@ -30,14 +30,14 @@ export default function useRegistrationPage() {
 
   function handleChangeEmail(val) {
     setForm((prev) => ({ ...prev, email: val }));
-    setErrors((prev) => ({ ...prev, email: getEmailError(val), api: "" }));
+    setErrors((prev) => ({ ...prev, email: user.getEmailError(val), api: "" }));
   }
 
   function handleChangePassword(val) {
     setForm((prev) => ({ ...prev, password: val }));
     setErrors((prev) => ({
       ...prev,
-      password: getPasswordError(val),
+      password: user.getPasswordError(val),
       api: "",
     }));
   }
@@ -60,7 +60,11 @@ export default function useRegistrationPage() {
       return;
     }
 
-    const result = await handleRegister(form.name, form.email, form.password);
+    const result = await user.handleRegister(
+      form.name,
+      form.email,
+      form.password,
+    );
 
     if (!result.error) {
       navigate(ROUTES.BOARDS);

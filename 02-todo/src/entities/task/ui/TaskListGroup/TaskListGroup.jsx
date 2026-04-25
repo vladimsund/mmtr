@@ -1,10 +1,11 @@
 import { Text } from "@/shared/ui";
-import { TaskNavigation, Task } from "@/entities/task";
+import { Task } from "@/entities/task";
 
 import styles from "./TaskListGroup.module.css";
 
 export default function TaskListGroup({
   list,
+  tasks,
   onAddTask,
   onEditTask,
   onDeleteTask,
@@ -14,8 +15,9 @@ export default function TaskListGroup({
   }
 
   return (
-    <TaskNavigation title={list.name}>
-      {list.tasks.map((task) => (
+    <div className={styles.panelListItem}>
+      <Text text={list.name} className={styles.panelListName} />
+      {tasks.map((task) => (
         <Task
           key={task.id}
           task={task}
@@ -30,6 +32,6 @@ export default function TaskListGroup({
         onClick={handleAddClick}
         className={styles.textNew}
       />
-    </TaskNavigation>
+    </div>
   );
 }

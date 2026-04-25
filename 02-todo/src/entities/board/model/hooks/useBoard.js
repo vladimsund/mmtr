@@ -1,19 +1,16 @@
-import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { fetchBoards, addBoard, editBoard, deleteBoard } from "../slices";
+import { fetchBoards, addBoard, editBoard, deleteBoard } from "../../api";
 import { allBoards } from "../selectors";
 
 export default function useBoard() {
   const dispatch = useDispatch();
+
   const boards = useSelector(allBoards);
 
-  useEffect(() => {
+  async function handleSave(name) {
+    await dispatch(addBoard({ name }));
     dispatch(fetchBoards());
-  }, [dispatch]);
-
-  function handleSave(name) {
-    dispatch(addBoard({ name }));
   }
 
   function handleEdit(name, boardId) {
