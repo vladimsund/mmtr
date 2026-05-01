@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { deleteList } from "@/entities/list/api";
-import { deleteBoard } from "@/entities/board/api";
+import * as listApi from "@/entities/list/api";
+import * as boardApi from "@/entities/board/api";
 
 import * as taskApi from "../../api";
 
@@ -22,8 +22,8 @@ const tasksSlice = createSlice({
         });
       })
       .addCase(taskApi.deleteTask.fulfilled, (state, action) => {
-        const id = action.payload.taskId;
-        state.tasks = state.tasks.filter((task) => task.id !== id);
+        const taskId = action.payload.taskId;
+        state.tasks = state.tasks.filter((task) => task.id !== taskId);
       })
       .addCase(taskApi.editTask.fulfilled, (state, action) => {
         const { name, taskId, isActive } = action.payload;
@@ -31,11 +31,59 @@ const tasksSlice = createSlice({
         findTask.name = name;
         findTask.isActive = isActive;
       })
-      .addCase(deleteList.fulfilled, (state, action) => {
+      .addCase(taskApi.reorderTask.fulfilled, (state, action) => {
+        const { newListId, taskId, order: newOrder } = action.payload;
+
+        const draggedTask = state.tasks.find((task) => task.id === taskId);
+        const oldListId = draggedTask.listId;
+        const oldOrder = draggedTask.order;
+
+        if (oldListId === newListId) {
+          if (oldOrder < newOrder) {
+            for (let i = 0; i < state.tasks.length; i++) {
+              const t = state.tasks[i];
+              if (
+                t.listId === oldListId &&
+                t.order > oldOrder &&
+                t.order <= newOrder
+              ) {
+                t.order--;
+              }
+            }
+          } else {
+            for (let i = 0; i < state.tasks.length; i++) {
+              const t = state.tasks[i];
+              if (
+                t.listId === oldListId &&
+                t.order >= newOrder &&
+                t.order < oldOrder
+              ) {
+                t.order++;
+              }
+            }
+          }
+        } else {
+          for (let i = 0; i < state.tasks.length; i++) {
+            const t = state.tasks[i];
+            if (t.listId === oldListId && t.order > oldOrder) {
+              t.order--;
+            } else if (t.listId === newListId && t.order >= newOrder) {
+              t.order++;
+            }
+          }
+        }
+
+        draggedTask.listId = newListId;
+        draggedTask.order = newOrder;
+      })
+      .addCase(listApi.deleteList.fulfilled, (state, action) => {
         const { listId } = action.payload;
         state.tasks = state.tasks.filter((task) => task.listId !== listId);
       })
-      .addCase(deleteBoard.fulfilled, (state) => {
+      .addCase(boardApi.fetchBoards.fulfilled, (state) => {
+        state.tasks = [];
+      })
+      .addCase(boardApi.deleteBoard.fulfilled, (state) => {
         state.tasks = [];
       });
   },

@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 
-import { fetchBoards, addBoard, editBoard, deleteBoard } from "../../api";
+import * as boardApi from "../../api";
 import { allBoards } from "../selectors";
 
 export default function useBoard() {
@@ -9,16 +9,20 @@ export default function useBoard() {
   const boards = useSelector(allBoards);
 
   async function handleSave(name) {
-    await dispatch(addBoard({ name }));
-    dispatch(fetchBoards());
+    await dispatch(boardApi.addBoard({ name }));
+    dispatch(boardApi.fetchBoards());
   }
 
   function handleEdit(name, boardId) {
-    dispatch(editBoard({ boardId, name }));
+    dispatch(boardApi.editBoard({ boardId, name }));
   }
 
   function handleDelete(boardId) {
-    dispatch(deleteBoard({ boardId: boardId }));
+    dispatch(boardApi.deleteBoard({ boardId }));
+  }
+
+  function handleReorder(boardId, order) {
+    dispatch(boardApi.reorderBoard({ boardId, order }));
   }
 
   return {
@@ -26,5 +30,6 @@ export default function useBoard() {
     handleSave,
     handleEdit,
     handleDelete,
+    handleReorder,
   };
 }

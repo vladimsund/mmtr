@@ -28,3 +28,8 @@ export const editTask = createAsyncThunk("tasks/edit", async (data) => {
   await client.put("/task/editTask", data);
   return data;
 });
+
+export const reorderTask = createAsyncThunk("tasks/reorder", async (data) => {
+  await client.put("/task/reorderTask", data);
+  return data;
+});

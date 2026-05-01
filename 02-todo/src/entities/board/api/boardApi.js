@@ -22,3 +22,8 @@ export const editBoard = createAsyncThunk("boards/edit", async (data) => {
   await client.put("/board/editBoard", data);
   return data;
 });
+
+export const reorderBoard = createAsyncThunk("boards/reorder", async (data) => {
+  await client.put("/board/reorderBoard", data);
+  return data;
+});

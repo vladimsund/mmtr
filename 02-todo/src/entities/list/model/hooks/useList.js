@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 
 import { allLists } from "../selectors";
-import { fetchLists, addList, editList, deleteList } from "../../api";
+import * as listApi from "../../api";
 
 export default function useList(boardId) {
   const dispatch = useDispatch();
@@ -9,16 +9,20 @@ export default function useList(boardId) {
   const lists = useSelector(allLists);
 
   async function handleSave(name, boardId) {
-    await dispatch(addList({ name, boardId }));
-    dispatch(fetchLists({ boardId }));
+    await dispatch(listApi.addList({ name, boardId }));
+    dispatch(listApi.fetchLists({ boardId }));
   }
 
   function handleEdit(name, listId) {
-    dispatch(editList({ name, boardId, listId }));
+    dispatch(listApi.editList({ name, boardId, listId }));
   }
 
   function handleDelete(listId) {
-    dispatch(deleteList({ boardId, listId }));
+    dispatch(listApi.deleteList({ boardId, listId }));
+  }
+
+  function handleReorder(boardId, listId, order) {
+    dispatch(listApi.reorderList({ boardId, listId, order }));
   }
 
   return {
@@ -26,5 +30,6 @@ export default function useList(boardId) {
     handleSave,
     handleEdit,
     handleDelete,
+    handleReorder,
   };
 }

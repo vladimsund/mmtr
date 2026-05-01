@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 
 import { allTasks } from "../selectors";
-import { fetchTasks, addTask, editTask, deleteTask } from "../../api";
+import * as taskApi from "../../api";
 
 export default function useTask(boardId) {
   const dispatch = useDispatch();
@@ -9,16 +9,20 @@ export default function useTask(boardId) {
   const tasks = useSelector(allTasks);
 
   function handleEdit(taskId, listId, name, isActive) {
-    dispatch(editTask({ boardId, listId, taskId, isActive, name }));
+    dispatch(taskApi.editTask({ boardId, listId, taskId, isActive, name }));
   }
 
   function handleDelete(taskId, listId) {
-    dispatch(deleteTask({ boardId, listId, taskId }));
+    dispatch(taskApi.deleteTask({ boardId, listId, taskId }));
   }
 
   async function handleSave(boardId, listId, name) {
-    await dispatch(addTask({ boardId, listId, name }));
-    dispatch(fetchTasks({ boardId, listId }));
+    await dispatch(taskApi.addTask({ boardId, listId, name }));
+    dispatch(taskApi.fetchTasks({ boardId, listId }));
+  }
+
+  function handleReorder(boardId, newListId, taskId, order) {
+    dispatch(taskApi.reorderTask({ boardId, newListId, taskId, order }));
   }
 
   return {
@@ -26,5 +30,6 @@ export default function useTask(boardId) {
     handleSave,
     handleEdit,
     handleDelete,
+    handleReorder,
   };
 }
