@@ -31,19 +31,15 @@ const listsSlice = createSlice({
 
         if (oldOrder < newOrder) {
           for (let i = 0; i < state.lists.length; i++) {
-            if (
-              state.lists[i].order > oldOrder &&
-              state.lists[i].order <= newOrder
-            ) {
+            const l = state.lists[i];
+            if (l.order > oldOrder && l.order <= newOrder) {
               state.lists[i].order--;
             }
           }
         } else {
           for (let i = 0; i < state.lists.length; i++) {
-            if (
-              state.lists[i].order >= newOrder &&
-              state.lists[i].order < oldOrder
-            ) {
+            const l = state.lists[i];
+            if (l.order >= newOrder && l.order < oldOrder) {
               state.lists[i].order++;
             }
           }

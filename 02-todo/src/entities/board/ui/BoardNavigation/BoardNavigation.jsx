@@ -14,8 +14,8 @@ export default function BoardNavigation({ onAddBoard }) {
   return (
     <div className={styles.lists}>
       <Text text="Мои доски" className={styles.title} />
-      {sortedBoards.map((board, index) => (
-        <Board key={board.id} index={index} element={board} />
+      {sortedBoards.map((board) => (
+        <Board key={board.id} element={board} />
       ))}
       <Text
         onClick={onAddBoard}

@@ -19,8 +19,8 @@ export default function ListNavigation({ onAddList }) {
       <BoardLabel />
       <div className={styles.lists}>
         <Text text="Мои списки" className={styles.title} />
-        {sortedLists.map((list, index) => (
-          <List key={list.id} index={index} element={list} />
+        {sortedLists.map((list) => (
+          <List key={list.id} element={list} />
         ))}
         <Text
           onClick={onAddList}
