@@ -1,27 +1,27 @@
-import { useNavigate } from "react-router-dom";
-
-import { ROUTES } from "@/shared/constants";
-import { NavBar } from "@/shared/ui";
+import { BoardLabel } from "@/entities";
 import { useBoard } from "@/entities/board";
+import { Text } from "@/shared/ui";
 
-export default function BoardNavigation({ handleOpenModal }) {
+import { Board } from "../Board";
+
+import styles from "./BoardNavigation.module.css";
+
+export default function BoardNavigation({ onAddBoard }) {
   const board = useBoard();
 
-  const navigate = useNavigate();
-
-  function handleClick(boardId) {
-    navigate(ROUTES.MY_BOARD.replace(":id", String(boardId)));
-  }
+  const sortedBoards = [...board.boards].sort((a, b) => a.order - b.order);
 
   return (
-    <NavBar
-      title="Мои доски"
-      elements={board.boards}
-      onEdit={board.handleEdit}
-      onDelete={board.handleDelete}
-      onClick={handleClick}
-      onAdd={handleOpenModal}
-      titleAdd="+ Добавить доску"
-    />
+    <div className={styles.lists}>
+      <Text text="Мои доски" className={styles.title} />
+      {sortedBoards.map((board) => (
+        <Board key={board.id} element={board} />
+      ))}
+      <Text
+        onClick={onAddBoard}
+        text="+ Добавить доску"
+        className={styles.textNew}
+      />
+    </div>
   );
 }

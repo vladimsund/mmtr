@@ -20,6 +20,30 @@ const boardsSlice = createSlice({
         const { name, boardId } = action.payload;
         const findBoard = state.boards.find((board) => board.id === boardId);
         findBoard.name = name;
+      })
+      .addCase(boardApi.reorderBoard.fulfilled, (state, action) => {
+        const { boardId, order: newOrder } = action.payload;
+
+        const draggedBoard = state.boards.find((b) => b.id === boardId);
+        const oldOrder = draggedBoard.order;
+
+        if (oldOrder < newOrder) {
+          for (let i = 0; i < state.boards.length; i++) {
+            const b = state.boards[i];
+            if (b.order > oldOrder && b.order <= newOrder) {
+              state.boards[i].order--;
+            }
+          }
+        } else {
+          for (let i = 0; i < state.boards.length; i++) {
+            const b = state.boards[i];
+            if (b.order >= newOrder && b.order < oldOrder) {
+              state.boards[i].order++;
+            }
+          }
+        }
+
+        draggedBoard.order = newOrder;
       });
   },
 });

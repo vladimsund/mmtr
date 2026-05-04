@@ -26,7 +26,7 @@ export default function BoardsManager() {
   return (
     <div className={styles.container}>
       <div className={styles.left}>
-        <BoardNavigation handleOpenModal={handleOpenModal} />
+        <BoardNavigation onAddBoard={handleOpenModal} />
       </div>
       <div className={styles.right}>
         <BoardModalCreate

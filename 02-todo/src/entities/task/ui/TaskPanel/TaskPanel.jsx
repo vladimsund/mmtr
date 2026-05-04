@@ -11,13 +11,15 @@ export default function TaskPanel({ onAddTask }) {
   const list = useList(boardId);
   const task = useTask(boardId);
 
+  const sortedLists = [...list.lists].sort((a, b) => a.order - b.order);
+
   function getListTasks(listId) {
     return task.tasks.filter((task) => task.listId === listId);
   }
 
   return (
     <div className={styles.panelList}>
-      {list.lists.map((list) => (
+      {sortedLists.map((list) => (
         <TaskListGroup
           key={list.id}
           list={list}

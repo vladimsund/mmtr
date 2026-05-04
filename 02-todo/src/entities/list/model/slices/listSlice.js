@@ -23,6 +23,33 @@ const listsSlice = createSlice({
         const findList = state.lists.find((list) => list.id === listId);
         findList.name = name;
       })
+      .addCase(listApi.reorderList.fulfilled, (state, action) => {
+        const { listId, order: newOrder } = action.payload;
+
+        const draggedList = state.lists.find((list) => list.id === listId);
+        const oldOrder = draggedList.order;
+
+        if (oldOrder < newOrder) {
+          for (let i = 0; i < state.lists.length; i++) {
+            const l = state.lists[i];
+            if (l.order > oldOrder && l.order <= newOrder) {
+              state.lists[i].order--;
+            }
+          }
+        } else {
+          for (let i = 0; i < state.lists.length; i++) {
+            const l = state.lists[i];
+            if (l.order >= newOrder && l.order < oldOrder) {
+              state.lists[i].order++;
+            }
+          }
+        }
+
+        draggedList.order = newOrder;
+      })
+      .addCase(boardApi.fetchBoards.fulfilled, (state) => {
+        state.lists = [];
+      })
       .addCase(boardApi.deleteBoard.fulfilled, (state) => {
         state.lists = [];
       });
