@@ -31,12 +31,12 @@
   text-decoration: underline;
 }
 
-.hint {
-  font-size: 20px;
-}
-
 .accountText {
   opacity: 0.5;
+}
+
+.hint {
+  font-size: 20px;
 }
 
 .registerLink {
@@ -46,4 +46,19 @@
 
 .registerLink:hover {
   text-decoration: underline;
+}
+
+@media screen and (max-width: 376px) {
+  .form {
+    max-width: 290px;
+  }
+
+  .button {
+    height: 27px;
+    font-size: 14px;
+  }
+
+  .hint {
+    font-size: 14px;
+  }
 }

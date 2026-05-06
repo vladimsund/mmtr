@@ -1,4 +1,3 @@
-import { BoardLabel } from "@/entities";
 import { useBoard } from "@/entities/board";
 import { Text } from "@/shared/ui";
 
