@@ -29,3 +29,17 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+@media screen and (max-width: 376px) {
+  .title {
+    font-size: 16px;
+  }
+
+  .itemBoard {
+    height: 60px;
+  }
+
+  .itemName {
+    font-size: 14px;
+  }
+}

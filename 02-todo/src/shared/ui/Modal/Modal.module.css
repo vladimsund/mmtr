@@ -55,3 +55,22 @@
   background-color: #fafafa;
   color: #000000;
 }
+
+@media screen and (max-width: 376px) {
+  .modalActions {
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .modalTitle {
+    font-size: 16px;
+  }
+
+  .modalBtnSave,
+  .modalBtnCancel {
+    max-width: 170px;
+    height: 40px;
+    font-size: 16px;
+  }
+}
