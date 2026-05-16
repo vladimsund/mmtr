@@ -5,13 +5,16 @@ import * as boardApi from "@/entities/board/api";
 
 import * as taskApi from "../../api";
 
-const initialState = { tasks: [] };
+const initialState = { tasks: [], isLoading: true };
 
 const tasksSlice = createSlice({
   name: "tasks",
   initialState,
   extraReducers(builder) {
     builder
+      .addCase(taskApi.fetchTasks.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(taskApi.fetchTasks.fulfilled, (state, action) => {
         const newTasks = action.payload;
         newTasks.forEach((newTask) => {
@@ -20,6 +23,7 @@ const tasksSlice = createSlice({
             state.tasks.push(newTask);
           }
         });
+        state.isLoading = false;
       })
       .addCase(taskApi.deleteTask.fulfilled, (state, action) => {
         const taskId = action.payload.taskId;

@@ -36,3 +36,9 @@
     padding: 30px;
   }
 }
+
+.loaderLists,
+.loaderTasks {
+  color: #ffffff;
+  font-size: 22px;
+}

@@ -2,15 +2,19 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import * as boardApi from "../../api";
 
-const initialState = { boards: [] };
+const initialState = { boards: [], isLoading: true };
 
 const boardsSlice = createSlice({
   name: "boards",
   initialState,
   extraReducers(builder) {
     builder
+      .addCase(boardApi.fetchBoards.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(boardApi.fetchBoards.fulfilled, (state, action) => {
         state.boards = action.payload;
+        state.isLoading = false;
       })
       .addCase(boardApi.deleteBoard.fulfilled, (state, action) => {
         const { boardId } = action.payload;
