@@ -14,3 +14,13 @@
   color: #ffffff;
   cursor: pointer;
 }
+
+@media screen and (max-width: 376px) {
+  .title {
+    font-size: 16px;
+  }
+
+  .textNew {
+    font-size: 14px;
+  }
+}

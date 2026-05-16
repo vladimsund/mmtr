@@ -49,3 +49,19 @@
   color: #ffc143;
   background-color: #373737;
 }
+
+@media screen and (max-width: 376px) {
+  .nav {
+    gap: 10px;
+  }
+
+  .linkButton {
+    max-width: 70px;
+    font-size: 10px;
+  }
+
+  .linkLogo {
+    height: 60%;
+    position: relative;
+  }
+}

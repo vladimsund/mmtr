@@ -14,20 +14,27 @@ export default function Modal({ isOpen = true, onClose, onSave, title }) {
   function handleKeyDown(event) {
     if (event.key === "Enter") {
       onSave(text);
+      setText("");
     }
   }
 
-  function handleContentClick(event) {
+  function handleContent(event) {
     event.stopPropagation();
   }
 
-  function handleSaveClick() {
+  function handleSave() {
     onSave(text);
+    setText("");
+  }
+
+  function handleCancel() {
+    setText("");
+    onClose();
   }
 
   return (
-    <div className={styles.modal} onClick={onClose}>
-      <div className={styles.modalContent} onClick={handleContentClick}>
+    <div className={styles.modal} onClick={handleCancel}>
+      <div className={styles.modalContent} onClick={handleContent}>
         <Text text={title} className={styles.modalTitle} />
         <div className={styles.modalInputContainer} onKeyDown={handleKeyDown}>
           <Input
@@ -39,12 +46,12 @@ export default function Modal({ isOpen = true, onClose, onSave, title }) {
         <div className={styles.modalActions}>
           <Button
             text="Сохранить"
-            onClick={handleSaveClick}
+            onClick={handleSave}
             className={styles.modalBtnSave}
           ></Button>
           <Button
             text="Отмена"
-            onClick={onClose}
+            onClick={handleCancel}
             className={styles.modalBtnCancel}
           ></Button>
         </div>

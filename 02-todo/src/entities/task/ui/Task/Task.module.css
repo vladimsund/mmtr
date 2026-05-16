@@ -48,3 +48,17 @@
   opacity: 1;
   visibility: visible;
 }
+
+@media screen and (max-width: 376px) {
+  .task {
+    height: 60px;
+  }
+
+  .name {
+    font-size: 14px;
+  }
+
+  .icons {
+    gap: 4px;
+  }
+}
