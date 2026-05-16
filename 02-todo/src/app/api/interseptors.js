@@ -1,5 +1,5 @@
 import { client } from "@/shared";
-import { selectToken } from "@/entities/user";
+import { selectToken, logout } from "@/entities/user";
 
 import store from "../store/store";
 
@@ -14,4 +14,17 @@ export function activateTokenHeader() {
 
     return config;
   });
+}
+
+export function activateTokenChecker() {
+  client.interceptors.response.use(
+    (response) => {
+      return response;
+    },
+    (error) => {
+      if (error.response?.status === 401) {
+        store.dispatch(logout());
+      }
+    },
+  );
 }

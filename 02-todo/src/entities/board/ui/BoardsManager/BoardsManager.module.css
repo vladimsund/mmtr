@@ -16,3 +16,8 @@
 .right {
   flex-grow: 1;
 }
+
+.loaderBoards {
+  color: #ffffff;
+  font-size: 22px;
+}

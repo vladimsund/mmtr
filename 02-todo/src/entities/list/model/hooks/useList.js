@@ -1,12 +1,13 @@
 import { useSelector, useDispatch } from "react-redux";
 
-import { allLists } from "../selectors";
+import { allLists, isListsLoading } from "../selectors";
 import * as listApi from "../../api";
 
 export default function useList(boardId) {
   const dispatch = useDispatch();
 
   const lists = useSelector(allLists);
+  const isLoading = useSelector(isListsLoading);
 
   async function handleSave(name, boardId) {
     await dispatch(listApi.addList({ name, boardId }));
@@ -27,6 +28,7 @@ export default function useList(boardId) {
 
   return {
     lists,
+    isLoading,
     handleSave,
     handleEdit,
     handleDelete,

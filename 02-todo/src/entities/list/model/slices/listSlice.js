@@ -4,15 +4,19 @@ import * as boardApi from "@/entities/board/api";
 
 import * as listApi from "../../api";
 
-const initialState = { lists: [] };
+const initialState = { lists: [], isLoading: true };
 
 const listsSlice = createSlice({
   name: "lists",
   initialState,
   extraReducers(builder) {
     builder
+      .addCase(listApi.fetchLists.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(listApi.fetchLists.fulfilled, (state, action) => {
         state.lists = action.payload;
+        state.isLoading = false;
       })
       .addCase(listApi.deleteList.fulfilled, (state, action) => {
         const { listId } = action.payload;

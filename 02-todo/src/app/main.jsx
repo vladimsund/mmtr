@@ -4,11 +4,12 @@ import { Provider } from "react-redux";
 
 import App from "./App.jsx";
 import store from "./store/store";
-import { activateTokenHeader } from "./api";
+import { activateTokenHeader, activateTokenChecker } from "./api";
 
 import "./styles/index.css";
 
 activateTokenHeader();
+activateTokenChecker();
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

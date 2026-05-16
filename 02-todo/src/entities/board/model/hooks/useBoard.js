@@ -1,12 +1,13 @@
 import { useSelector, useDispatch } from "react-redux";
 
 import * as boardApi from "../../api";
-import { allBoards } from "../selectors";
+import { allBoards, isBoardsLoading } from "../selectors";
 
 export default function useBoard() {
   const dispatch = useDispatch();
 
   const boards = useSelector(allBoards);
+  const isLoading = useSelector(isBoardsLoading);
 
   async function handleSave(name) {
     await dispatch(boardApi.addBoard({ name }));
@@ -27,6 +28,7 @@ export default function useBoard() {
 
   return {
     boards,
+    isLoading,
     handleSave,
     handleEdit,
     handleDelete,

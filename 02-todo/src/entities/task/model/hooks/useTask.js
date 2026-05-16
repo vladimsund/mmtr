@@ -1,12 +1,13 @@
 import { useSelector, useDispatch } from "react-redux";
 
-import { allTasks } from "../selectors";
 import * as taskApi from "../../api";
+import { allTasks, isTasksLoading } from "../selectors";
 
 export default function useTask(boardId) {
   const dispatch = useDispatch();
 
   const tasks = useSelector(allTasks);
+  const isLoading = useSelector(isTasksLoading);
 
   function handleEdit(taskId, listId, name, isActive) {
     dispatch(taskApi.editTask({ boardId, listId, taskId, isActive, name }));
@@ -27,6 +28,7 @@ export default function useTask(boardId) {
 
   return {
     tasks,
+    isLoading,
     handleSave,
     handleEdit,
     handleDelete,

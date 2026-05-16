@@ -7,7 +7,7 @@ import { fetchLists } from "@/entities/list/api";
 import { ListNavigation, useList } from "@/entities/list";
 import { fetchTasks } from "@/entities/task/api";
 import { TaskPanel, useTask } from "@/entities/task";
-import { Modal } from "@/shared";
+import { Modal, Text } from "@/shared/ui";
 
 import styles from "./TaskManager.module.css";
 
@@ -80,9 +80,17 @@ export default function TaskManager() {
   return (
     <div className={styles.container}>
       <div className={styles.left}>
-        <ListNavigation onAddList={openAddListModal} />
+        {list.isLoading ? (
+          <Text text="Загрузка списков..." className={styles.loaderLists} />
+        ) : (
+          <ListNavigation onAddList={openAddListModal} />
+        )}
       </div>
-      <div className={styles.right}>{rightContent}</div>
+      {task.isLoading ? (
+        <Text text="Загрузка задач..." className={styles.loaderTasks} />
+      ) : (
+        <div className={styles.right}>{rightContent}</div>
+      )}
     </div>
   );
 }

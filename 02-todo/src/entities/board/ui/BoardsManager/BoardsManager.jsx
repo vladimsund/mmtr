@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
+import { useBoard } from "@/entities/board";
+import { Text } from "@/shared/ui";
+
 import { BoardNavigation, BoardModalCreate } from "../";
 import { fetchBoards } from "../../api";
 
@@ -8,6 +11,8 @@ import styles from "./BoardsManager.module.css";
 
 export default function BoardsManager() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const board = useBoard();
 
   const dispatch = useDispatch();
 
@@ -26,7 +31,11 @@ export default function BoardsManager() {
   return (
     <div className={styles.container}>
       <div className={styles.left}>
-        <BoardNavigation onAddBoard={handleOpenModal} />
+        {board.isLoading ? (
+          <Text text="Загрузка досок..." className={styles.loaderBoards} />
+        ) : (
+          <BoardNavigation onAddBoard={handleOpenModal} />
+        )}
       </div>
       <div className={styles.right}>
         <BoardModalCreate
