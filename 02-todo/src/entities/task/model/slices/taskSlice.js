@@ -5,7 +5,7 @@ import * as boardApi from "@/entities/board/api";
 
 import * as taskApi from "../../api";
 
-const initialState = { tasks: [], isLoading: true };
+const initialState = { tasks: [], isLoading: false };
 
 const tasksSlice = createSlice({
   name: "tasks",

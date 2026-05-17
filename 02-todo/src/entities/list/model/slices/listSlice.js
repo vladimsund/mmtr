@@ -4,7 +4,7 @@ import * as boardApi from "@/entities/board/api";
 
 import * as listApi from "../../api";
 
-const initialState = { lists: [], isLoading: true };
+const initialState = { lists: [], isLoading: false };
 
 const listsSlice = createSlice({
   name: "lists",

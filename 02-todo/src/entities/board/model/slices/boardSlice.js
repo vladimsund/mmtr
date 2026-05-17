@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import * as boardApi from "../../api";
 
-const initialState = { boards: [], isLoading: true };
+const initialState = { boards: [], isLoading: false };
 
 const boardsSlice = createSlice({
   name: "boards",

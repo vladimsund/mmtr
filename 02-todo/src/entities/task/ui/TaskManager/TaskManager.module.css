@@ -16,7 +16,17 @@
 }
 
 .right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
   flex-grow: 1;
+}
+
+.loaderLists,
+.loaderTasks {
+  color: #ffffff;
+  font-size: 20px;
 }
 
 @media screen and (max-width: 376px) {
@@ -29,16 +39,6 @@
   }
 
   .right {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: #303030;
-    padding: 30px;
   }
-}
-
-.loaderLists,
-.loaderTasks {
-  color: #ffffff;
-  font-size: 22px;
 }

@@ -86,11 +86,13 @@ export default function TaskManager() {
           <ListNavigation onAddList={openAddListModal} />
         )}
       </div>
-      {task.isLoading ? (
-        <Text text="Загрузка задач..." className={styles.loaderTasks} />
-      ) : (
-        <div className={styles.right}>{rightContent}</div>
-      )}
+      <div className={styles.right}>
+        {task.isLoading ? (
+          <Text text="Загрузка задач..." className={styles.loaderTasks} />
+        ) : (
+          rightContent
+        )}
+      </div>
     </div>
   );
 }

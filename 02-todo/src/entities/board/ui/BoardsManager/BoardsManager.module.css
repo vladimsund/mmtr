@@ -15,13 +15,13 @@
   padding: 30px;
 }
 
-.right {
-  flex-grow: 1;
+.loaderBoards {
+  font-size: 20px;
+  color: #ffffff;
 }
 
-.loaderBoards {
-  color: #ffffff;
-  font-size: 22px;
+.right {
+  flex-grow: 1;
 }
 
 @media screen and (max-width: 376px) {
