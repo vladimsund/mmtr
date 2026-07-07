@@ -25,7 +25,7 @@ function App() {
   return (
     <DndProvider backend={HTML5Backend}>
       <Router>
-        <Header logout={handleLogout} isUserAuth={isUserAuth} />
+        <Header isUserAuth={isUserAuth} onLogout={handleLogout} />
         <Routes>
           <Route path={ROUTES.HOME} element={<Navigate to={ROUTES.BOARDS} />} />
           <Route path={ROUTES.AUTH} element={<LoginPage />} />

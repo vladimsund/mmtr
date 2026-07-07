@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { ROUTES, USER_ERRORS, DEFAULT_ERRORS } from "@/shared";
+import { ROUTES, USER_ERRORS } from "@/shared";
 
 import { useUser } from "@/entities/user";
 
@@ -45,18 +45,7 @@ export default function useLoginForm() {
       return;
     }
 
-    let ouputErrorApi = "";
-    const statusCode = result.payload?.statusCode;
-
-    if (statusCode === 401) {
-      ouputErrorApi = USER_ERRORS.NOT_EXIST;
-    } else if (statusCode === 400) {
-      ouputErrorApi = USER_ERRORS.VALIDATE_INPUT;
-    } else {
-      ouputErrorApi = DEFAULT_ERRORS.NETWORK_API;
-    }
-
-    setErrors((p) => ({ ...p, api: ouputErrorApi }));
+    setErrors((p) => ({ ...p, api: USER_ERRORS.NOT_EXIST }));
   }
 
   return {

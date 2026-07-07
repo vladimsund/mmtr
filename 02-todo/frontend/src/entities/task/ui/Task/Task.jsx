@@ -67,44 +67,47 @@ export default function Task({ task, list, onChange, onEdit, onDelete }) {
     },
   });
 
+  function dndRefs(el) {
+    drag(el);
+    drop(el);
+  }
+
   return (
-    <div ref={drag}>
-      <div ref={drop}>
-        <div className={styles.task}>
-          <div className={styles.left}>
-            <Icon
-              src={task.isActive ? circleActive : circle}
-              alt="status"
-              onClick={handleChange}
-              className={styles.icon}
+    <div ref={dndRefs}>
+      <div className={styles.task}>
+        <div className={styles.left}>
+          <Icon
+            src={task.isActive ? circleActive : circle}
+            alt="status"
+            onClick={handleChange}
+            className={styles.icon}
+          />
+          {isEditing ? (
+            <Input
+              variant="underlined"
+              autoFocus
+              value={value}
+              onChange={setValue}
+              onBlur={handleSave}
+              onKeyDown={handleKeyDown}
             />
-            {isEditing ? (
-              <Input
-                variant="underlined"
-                autoFocus
-                value={value}
-                onChange={setValue}
-                onBlur={handleSave}
-                onKeyDown={handleKeyDown}
-              />
-            ) : (
-              <Text text={task.name} className={styles.name} />
-            )}
-          </div>
-          <div className={styles.icons} onClick={stopPropagation}>
-            <Icon
-              src={penWhite}
-              alt="edit"
-              onClick={handleStartEditing}
-              className={styles.iconAction}
-            />
-            <Icon
-              src={crossWhite}
-              alt="delete"
-              onClick={handleDelete}
-              className={styles.iconAction}
-            />
-          </div>
+          ) : (
+            <Text text={task.name} className={styles.name} />
+          )}
+        </div>
+        <div className={styles.icons} onClick={stopPropagation}>
+          <Icon
+            src={penWhite}
+            alt="edit"
+            onClick={handleStartEditing}
+            className={styles.iconAction}
+          />
+          <Icon
+            src={crossWhite}
+            alt="delete"
+            onClick={handleDelete}
+            className={styles.iconAction}
+          />
         </div>
       </div>
     </div>

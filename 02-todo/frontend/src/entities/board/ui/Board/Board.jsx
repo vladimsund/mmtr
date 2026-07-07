@@ -41,17 +41,20 @@ export default function Board({ element }) {
     },
   });
 
+  function dndRefs(el) {
+    drag(el);
+    drop(el);
+  }
+
   return (
-    <div ref={drag}>
-      <div ref={drop}>
-        <EditableBar
-          id={element.id}
-          title={element.name}
-          onEdit={handleEdit}
-          onDelete={handleDelete}
-          onClick={handleClick}
-        />
-      </div>
+    <div ref={dndRefs}>
+      <EditableBar
+        id={element.id}
+        title={element.name}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+        onClick={handleClick}
+      />
     </div>
   );
 }
