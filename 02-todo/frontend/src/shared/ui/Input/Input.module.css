@@ -21,7 +21,7 @@
   padding: 4px 0;
 }
 
-@media screen and (max-width: 376px) {
+@media (max-width: 376px) {
   .input {
     font-size: 14px;
   }

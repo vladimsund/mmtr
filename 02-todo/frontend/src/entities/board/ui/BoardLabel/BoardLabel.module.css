@@ -30,7 +30,7 @@
   text-overflow: ellipsis;
 }
 
-@media screen and (max-width: 376px) {
+@media (max-width: 376px) {
   .title {
     font-size: 16px;
   }

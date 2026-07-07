@@ -7,7 +7,7 @@
   margin: 30px;
 }
 
-@media screen and (max-width: 376px) {
+@media (max-width: 376px) {
   .panelList {
     max-width: 300px;
     margin: 30px 0;

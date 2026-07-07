@@ -48,7 +48,7 @@
   text-decoration: underline;
 }
 
-@media screen and (max-width: 376px) {
+@media (max-width: 376px) {
   .form {
     max-width: 290px;
   }

@@ -17,7 +17,7 @@
   object-fit: contain;
 }
 
-@media screen and (max-width: 376px) {
+@media (max-width: 376px) {
   .image {
     width: 18px;
     height: 18px;

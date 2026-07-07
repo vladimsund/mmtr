@@ -1,15 +1,13 @@
 import clsx from "clsx";
 import { Link, useLocation } from "react-router-dom";
 
-import { useUser } from "@/entities/user";
 import { ROUTES } from "@/shared/constants";
 import { home, homeActive } from "@/shared/assets";
 
 import styles from "./Header.module.css";
 
-export default function Header() {
+export default function Header({ isUserAuth, onLogout }) {
   const { pathname } = useLocation();
-  const { handleLogout, isUserAuth } = useUser();
 
   const isHomeActive =
     pathname === ROUTES.BOARDS || pathname.startsWith("/board/");
@@ -49,7 +47,7 @@ export default function Header() {
           <Link
             to={ROUTES.AUTH}
             className={clsx(styles.link, styles.linkButton)}
-            onClick={handleLogout}
+            onClick={onLogout}
           >
             Выйти
           </Link>

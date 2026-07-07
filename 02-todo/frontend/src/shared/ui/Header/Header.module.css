@@ -50,7 +50,7 @@
   background-color: #373737;
 }
 
-@media screen and (max-width: 376px) {
+@media (max-width: 376px) {
   .nav {
     gap: 10px;
   }

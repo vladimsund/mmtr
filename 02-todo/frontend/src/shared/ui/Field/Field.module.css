@@ -20,7 +20,7 @@
   margin-top: 4px;
 }
 
-@media screen and (max-width: 376px) {
+@media (max-width: 376px) {
   .label {
     font-size: 16px;
   }

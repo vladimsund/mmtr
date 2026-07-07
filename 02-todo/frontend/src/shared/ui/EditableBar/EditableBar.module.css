@@ -49,7 +49,7 @@
   object-fit: contain;
 }
 
-@media screen and (max-width: 376px) {
+@media (max-width: 376px) {
   .edit {
     height: 58px;
     max-width: 250px;

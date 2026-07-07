@@ -8,6 +8,7 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
 import { ROUTES, Header } from "@/shared";
+import { useUser } from "@/entities/user";
 import {
   LoginPage,
   BoardsPage,
@@ -19,10 +20,12 @@ import {
 import { AuthProvider } from "./provider";
 
 function App() {
+  const { handleLogout, isUserAuth } = useUser();
+
   return (
     <DndProvider backend={HTML5Backend}>
       <Router>
-        <Header />
+        <Header logout={handleLogout} isUserAuth={isUserAuth} />
         <Routes>
           <Route path={ROUTES.HOME} element={<Navigate to={ROUTES.BOARDS} />} />
           <Route path={ROUTES.AUTH} element={<LoginPage />} />

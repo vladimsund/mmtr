@@ -28,7 +28,7 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 376px) {
+@media (max-width: 376px) {
   .panelListName {
     display: flex;
     height: 60px;
