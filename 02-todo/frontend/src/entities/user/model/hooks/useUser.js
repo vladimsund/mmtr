@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 
-import { USER_ERRORS } from "@/shared";
+import { DEFAULT_ERRORS, USER_ERRORS } from "@/shared";
 
 import { login, register } from "../../api";
 import { logout, refreshAuth } from "../slices";
@@ -11,12 +11,28 @@ export default function useUser() {
 
   const isUserAuth = useSelector(isAuth);
 
-  function handleLogin(email, password) {
-    return dispatch(login({ email, password }));
+  async function handleLogin(email, password) {
+    try {
+      await dispatch(login({ email, password })).unwrap();
+    } catch (error) {
+      if (error.statusCode === 401) {
+        return USER_ERRORS.NOT_EXIST;
+      }
+
+      return DEFAULT_ERRORS.NETWORK_API;
+    }
   }
 
-  function handleRegister(name, email, password) {
-    return dispatch(register({ name, email, password }));
+  async function handleRegister(name, email, password) {
+    try {
+      await dispatch(register({ name, email, password })).unwrap();
+    } catch (error) {
+      if (error.statusCode === 409) {
+        return USER_ERRORS.EMAIL_BUSY;
+      }
+
+      return DEFAULT_ERRORS.NETWORK_API;
+    }
   }
 
   function handleLogout() {

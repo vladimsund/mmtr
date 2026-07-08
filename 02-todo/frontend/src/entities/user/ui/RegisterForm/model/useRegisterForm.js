@@ -60,18 +60,18 @@ export default function useRegistrationPage() {
       return;
     }
 
-    const result = await user.handleRegister(
+    const error = await user.handleRegister(
       form.name,
       form.email,
       form.password,
     );
 
-    if (!result.error) {
+    if (!error) {
       navigate(ROUTES.BOARDS);
       return;
     }
 
-    setErrors((p) => ({ ...p, api: USER_ERRORS.USER_BUSY }));
+    setErrors((p) => ({ ...p, api: error }));
   }
 
   function handleNavigateTo() {

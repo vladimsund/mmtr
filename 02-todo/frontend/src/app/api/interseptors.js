@@ -25,6 +25,8 @@ export function activateTokenChecker() {
       if (error.response?.status === 401) {
         store.dispatch(logout());
       }
+
+      return Promise.reject(error);
     },
   );
 }

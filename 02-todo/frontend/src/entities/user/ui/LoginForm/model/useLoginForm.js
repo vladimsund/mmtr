@@ -38,14 +38,14 @@ export default function useLoginForm() {
       return;
     }
 
-    const result = await user.handleLogin(form.email, form.password);
+    const error = await user.handleLogin(form.email, form.password);
 
-    if (!result.error) {
+    if (!error) {
       navigate(ROUTES.BOARDS);
       return;
     }
 
-    setErrors((p) => ({ ...p, api: USER_ERRORS.NOT_EXIST }));
+    setErrors((p) => ({ ...p, api: error }));
   }
 
   return {
