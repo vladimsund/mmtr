@@ -1,39 +1,40 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import { useDispatch } from "react-redux";
 
-import { fetchBoards } from "@/entities/board/api";
-import { fetchLists } from "@/entities/list/api";
-import { ListNavigation, useList } from "@/entities/list";
-import { fetchTasks } from "@/entities/task/api";
+import { useBoard } from "@/entities/board";
+import { useList } from "@/entities/list";
 import { TaskPanel, useTask } from "@/entities/task";
 import { Modal, Text } from "@/shared/ui";
+import { ListNavigation } from "@/widgets/listNavigation";
 
 import styles from "./TaskManager.module.css";
 
-export default function TaskManager() {
+export function TaskManager() {
   const { id: boardId } = useParams();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeListId, setActiveListId] = useState(null);
 
-  const dispatch = useDispatch();
-
+  const board = useBoard();
   const list = useList(boardId);
   const task = useTask(boardId);
 
   useEffect(() => {
     const sync = async () => {
-      await dispatch(fetchBoards());
-      const lists = await dispatch(fetchLists({ boardId })).unwrap();
-
-      for (let i = 0; i < lists.length; i++) {
-        dispatch(fetchTasks({ boardId, listId: lists[i].id }));
-      }
+      await board.handleFetch();
+      await list.handleFetch();
     };
 
     sync();
-  }, [dispatch, boardId]);
+  }, [boardId]);
+
+  useEffect(() => {
+    if (list.lists && list.lists.length > 0 && !list.isLoading) {
+      list.lists.forEach((l) => {
+        task.handleFetch(l.id);
+      });
+    }
+  }, [list.isLoading]);
 
   function openAddListModal() {
     setActiveListId(null);

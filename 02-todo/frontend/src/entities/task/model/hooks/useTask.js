@@ -9,26 +9,33 @@ export default function useTask(boardId) {
   const tasks = useSelector(allTasks);
   const isLoading = useSelector(isTasksLoading);
 
-  function handleEdit(taskId, listId, name, isActive) {
-    dispatch(taskApi.editTask({ boardId, listId, taskId, isActive, name }));
+  async function handleFetch(listId) {
+    await dispatch(taskApi.fetchTasks({ boardId, listId }));
   }
 
-  function handleDelete(taskId, listId) {
-    dispatch(taskApi.deleteTask({ boardId, listId, taskId }));
+  async function handleEdit(taskId, listId, name, isActive) {
+    await dispatch(
+      taskApi.editTask({ boardId, listId, taskId, isActive, name }),
+    );
+  }
+
+  async function handleDelete(taskId, listId) {
+    await dispatch(taskApi.deleteTask({ boardId, listId, taskId }));
   }
 
   async function handleSave(boardId, listId, name) {
     await dispatch(taskApi.addTask({ boardId, listId, name }));
-    dispatch(taskApi.fetchTasks({ boardId, listId }));
+    handleFetch(listId);
   }
 
-  function handleReorder(boardId, newListId, taskId, order) {
-    dispatch(taskApi.reorderTask({ boardId, newListId, taskId, order }));
+  async function handleReorder(boardId, newListId, taskId, order) {
+    await dispatch(taskApi.reorderTask({ boardId, newListId, taskId, order }));
   }
 
   return {
     tasks,
     isLoading,
+    handleFetch,
     handleSave,
     handleEdit,
     handleDelete,

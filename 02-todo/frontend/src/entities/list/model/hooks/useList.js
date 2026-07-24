@@ -9,26 +9,31 @@ export default function useList(boardId) {
   const lists = useSelector(allLists);
   const isLoading = useSelector(isListsLoading);
 
+  async function handleFetch() {
+    await dispatch(listApi.fetchLists({ boardId }));
+  }
+
   async function handleSave(name, boardId) {
     await dispatch(listApi.addList({ name, boardId }));
-    dispatch(listApi.fetchLists({ boardId }));
+    handleFetch();
   }
 
-  function handleEdit(name, listId) {
-    dispatch(listApi.editList({ name, boardId, listId }));
+  async function handleEdit(name, listId) {
+    await dispatch(listApi.editList({ name, boardId, listId }));
   }
 
-  function handleDelete(listId) {
-    dispatch(listApi.deleteList({ boardId, listId }));
+  async function handleDelete(listId) {
+    await dispatch(listApi.deleteList({ boardId, listId }));
   }
 
-  function handleReorder(boardId, listId, order) {
-    dispatch(listApi.reorderList({ boardId, listId, order }));
+  async function handleReorder(boardId, listId, order) {
+    await dispatch(listApi.reorderList({ boardId, listId, order }));
   }
 
   return {
     lists,
     isLoading,
+    handleFetch,
     handleSave,
     handleEdit,
     handleDelete,

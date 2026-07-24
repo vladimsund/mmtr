@@ -6,7 +6,7 @@ import { home, homeActive } from "@/shared/assets";
 
 import styles from "./Header.module.css";
 
-export default function Header({ isUserAuth, onLogout }) {
+export function Header({ isUserAuth, onLogout }) {
   const { pathname } = useLocation();
 
   const isHomeActive =

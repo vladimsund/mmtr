@@ -1,1 +1,1 @@
-export { default as TaskPanel } from "./TaskPanel";
+export { TaskPanel } from "./TaskPanel";

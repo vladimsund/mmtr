@@ -1,1 +1,1 @@
-export { default as ErrorForm } from "./ErrorForm";
+export { ErrorForm } from "./ErrorForm";

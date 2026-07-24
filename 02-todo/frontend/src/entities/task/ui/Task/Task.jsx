@@ -9,7 +9,7 @@ import { DND_TYPES } from "@/shared/constants";
 
 import styles from "./Task.module.css";
 
-export default function Task({ task, list, onChange, onEdit, onDelete }) {
+export function Task({ task, list, onChange, onEdit, onDelete }) {
   const [isEditing, setIsEditing] = useState(false);
   const [value, setValue] = useState(task.name);
 

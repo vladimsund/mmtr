@@ -7,7 +7,7 @@ import { Task, useTask } from "@/entities/task";
 
 import styles from "./TaskListGroup.module.css";
 
-export default function TaskListGroup({
+export function TaskListGroup({
   list,
   tasks,
   onAddTask,

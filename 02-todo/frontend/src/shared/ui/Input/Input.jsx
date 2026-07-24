@@ -2,7 +2,7 @@ import clsx from "clsx";
 
 import styles from "./Input.module.css";
 
-export default function Input({
+export function Input({
   value,
   onChange,
   variant = "filled",

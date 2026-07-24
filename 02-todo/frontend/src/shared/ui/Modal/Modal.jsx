@@ -4,7 +4,7 @@ import { Input, Button, Text } from "@/shared";
 
 import styles from "./Modal.module.css";
 
-export default function Modal({ isOpen = true, onClose, onSave, title }) {
+export function Modal({ isOpen = true, onClose, onSave, title }) {
   const [text, setText] = useState("");
 
   if (!isOpen) {

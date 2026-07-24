@@ -6,7 +6,7 @@ import { Input, Icon, Text } from "@/shared/ui";
 
 import styles from "./EditableBar.module.css";
 
-export default function EditableBar({ id, title, onEdit, onDelete, onClick }) {
+export function EditableBar({ id, title, onEdit, onDelete, onClick }) {
   const [isEditing, setIsEditing] = useState(false);
   const [value, setValue] = useState(title);
 

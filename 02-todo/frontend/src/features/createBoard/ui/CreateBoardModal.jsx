@@ -1,7 +1,7 @@
 import { Modal } from "@/shared/ui";
 import { useBoard } from "@/entities/board";
 
-export default function CreateBoardModal({ isOpen, onCloseModal }) {
+export function CreateBoardModal({ isOpen, onCloseModal }) {
   const board = useBoard();
 
   function saveBoard(name) {

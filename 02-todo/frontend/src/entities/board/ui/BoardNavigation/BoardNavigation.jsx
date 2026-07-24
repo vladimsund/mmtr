@@ -1,11 +1,11 @@
 import { useBoard } from "@/entities/board";
 import { Text } from "@/shared/ui";
 
-import { Board } from "../Board";
+import { BoardCard } from "../BoardCard";
 
 import styles from "./BoardNavigation.module.css";
 
-export default function BoardNavigation({ onAddBoard }) {
+export function BoardNavigation({ onAddBoard }) {
   const board = useBoard();
 
   const sortedBoards = [...board.boards].sort((a, b) => a.order - b.order);
@@ -14,7 +14,7 @@ export default function BoardNavigation({ onAddBoard }) {
     <div className={styles.lists}>
       <Text text="Мои доски" className={styles.title} />
       {sortedBoards.map((board) => (
-        <Board key={board.id} element={board} />
+        <BoardCard key={board.id} element={board} />
       ))}
       <Text
         onClick={onAddBoard}

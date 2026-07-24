@@ -5,7 +5,7 @@ import { useBoard } from "@/entities/board";
 
 import styles from "./BoardLabel.module.css";
 
-export default function BoardLabel() {
+export function BoardLabel() {
   const { id: boardId } = useParams();
 
   const { boards } = useBoard();
@@ -15,14 +15,14 @@ export default function BoardLabel() {
     const board = boards.find((b) => b.id === boardId);
 
     if (!board) {
-      return;
+      return null;
     }
 
     return board.name;
   }
 
   if (!boardName) {
-    return;
+    return null;
   }
 
   return (

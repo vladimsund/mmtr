@@ -1,14 +1,12 @@
 import { useParams } from "react-router";
 
-import { BoardLabel } from "@/entities";
-import { useList } from "@/entities/list";
+import { BoardLabel } from "@/entities/board";
+import { useList, List } from "@/entities/list";
 import { Text } from "@/shared/ui";
-
-import { List } from "../List";
 
 import styles from "./ListNavigation.module.css";
 
-export default function ListNavigation({ onAddList }) {
+export function ListNavigation({ onAddList }) {
   const { id: boardId } = useParams();
   const list = useList(boardId);
 

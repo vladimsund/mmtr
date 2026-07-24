@@ -1,1 +1,1 @@
-export { default as BoardNavigation } from "./BoardNavigation";
+export { BoardNavigation } from "./BoardNavigation";

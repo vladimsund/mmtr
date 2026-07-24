@@ -5,7 +5,7 @@ import { useList } from "@/entities/list";
 
 import styles from "./TaskPanel.module.css";
 
-export default function TaskPanel({ onAddTask }) {
+export function TaskPanel({ onAddTask }) {
   const { id: boardId } = useParams();
 
   const list = useList(boardId);

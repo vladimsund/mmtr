@@ -1,1 +1,1 @@
-export { default as TaskListGroup } from "./TaskListGroup";
+export { TaskListGroup } from "./TaskListGroup";

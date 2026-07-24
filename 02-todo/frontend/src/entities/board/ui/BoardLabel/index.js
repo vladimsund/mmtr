@@ -1,1 +1,1 @@
-export { default as BoardLabel } from "./BoardLabel";
+export { BoardLabel } from "./BoardLabel";

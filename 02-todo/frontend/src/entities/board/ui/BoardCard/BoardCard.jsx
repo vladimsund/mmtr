@@ -5,7 +5,7 @@ import { useBoard } from "@/entities/board";
 import { EditableBar } from "@/shared";
 import { DND_TYPES, ROUTES } from "@/shared/constants";
 
-export default function Board({ element }) {
+export function BoardCard({ element }) {
   const board = useBoard();
 
   const navigate = useNavigate();

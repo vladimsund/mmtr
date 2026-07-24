@@ -1,1 +1,1 @@
-export { default as EditableBar } from "./EditableBar";
+export { EditableBar } from "./EditableBar";

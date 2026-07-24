@@ -51,9 +51,6 @@ const listsSlice = createSlice({
 
         draggedList.order = newOrder;
       })
-      .addCase(boardApi.fetchBoards.fulfilled, (state) => {
-        state.lists = [];
-      })
       .addCase(boardApi.deleteBoard.fulfilled, (state) => {
         state.lists = [];
       });

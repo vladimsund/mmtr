@@ -9,26 +9,31 @@ export default function useBoard() {
   const boards = useSelector(allBoards);
   const isLoading = useSelector(isBoardsLoading);
 
+  async function handleFetch() {
+    await dispatch(boardApi.fetchBoards());
+  }
+
   async function handleSave(name) {
     await dispatch(boardApi.addBoard({ name }));
-    dispatch(boardApi.fetchBoards());
+    handleFetch();
   }
 
-  function handleEdit(name, boardId) {
-    dispatch(boardApi.editBoard({ boardId, name }));
+  async function handleEdit(name, boardId) {
+    await dispatch(boardApi.editBoard({ boardId, name }));
   }
 
-  function handleDelete(boardId) {
-    dispatch(boardApi.deleteBoard({ boardId }));
+  async function handleDelete(boardId) {
+    await dispatch(boardApi.deleteBoard({ boardId }));
   }
 
-  function handleReorder(boardId, order) {
-    dispatch(boardApi.reorderBoard({ boardId, order }));
+  async function handleReorder(boardId, order) {
+    await dispatch(boardApi.reorderBoard({ boardId, order }));
   }
 
   return {
     boards,
     isLoading,
+    handleFetch,
     handleSave,
     handleEdit,
     handleDelete,

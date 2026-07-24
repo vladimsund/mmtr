@@ -86,9 +86,6 @@ const tasksSlice = createSlice({
       })
       .addCase(boardApi.fetchBoards.fulfilled, (state) => {
         state.tasks = [];
-      })
-      .addCase(boardApi.deleteBoard.fulfilled, (state) => {
-        state.tasks = [];
       });
   },
 });

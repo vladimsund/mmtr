@@ -1,24 +1,19 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
 
-import { useBoard } from "@/entities/board";
+import { useBoard, BoardNavigation } from "@/entities/board";
 import { Text } from "@/shared/ui";
-
-import { BoardNavigation, BoardModalCreate } from "../";
-import { fetchBoards } from "../../api";
+import { CreateBoardModal } from "@/features/createBoard";
 
 import styles from "./BoardsManager.module.css";
 
-export default function BoardsManager() {
+export function BoardsManager() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const board = useBoard();
 
-  const dispatch = useDispatch();
-
   useEffect(() => {
-    dispatch(fetchBoards());
-  }, [dispatch]);
+    board.handleFetch();
+  }, []);
 
   function handleOpenModal() {
     setIsModalOpen(true);
@@ -38,9 +33,9 @@ export default function BoardsManager() {
         )}
       </div>
       <div className={styles.right}>
-        <BoardModalCreate
+        <CreateBoardModal
           isOpen={isModalOpen}
-          handleCloseModal={handleCloseModal}
+          onCloseModal={handleCloseModal}
         />
       </div>
     </div>

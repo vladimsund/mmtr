@@ -3,7 +3,7 @@ import { RegisterForm } from "@/entities/user";
 
 import styles from "./RegistrationPage.module.css";
 
-export default function RegistrationPage() {
+export function RegistrationPage() {
   return (
     <div className={styles.register}>
       <Text text="Создайте аккаунт" className={styles.title} />

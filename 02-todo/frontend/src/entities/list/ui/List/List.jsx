@@ -5,7 +5,7 @@ import { useList } from "@/entities/list";
 import { EditableBar } from "@/shared";
 import { DND_TYPES } from "@/shared/constants";
 
-export default function List({ element }) {
+export function List({ element }) {
   const { id: boardId } = useParams();
   const list = useList(boardId);
 

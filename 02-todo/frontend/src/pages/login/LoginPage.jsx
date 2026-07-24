@@ -3,7 +3,7 @@ import { LoginForm } from "@/entities/user";
 
 import styles from "./LoginPage.module.css";
 
-export default function LoginPage() {
+export function LoginPage() {
   return (
     <div className={styles.auth}>
       <Text className={styles.title} text="Войдите в аккаунт" />

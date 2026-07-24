@@ -1,5 +1,5 @@
-import { BoardsManager } from "@/entities/board";
+import { BoardsManager } from "@/widgets";
 
-export default function BoardsPage() {
+export function BoardsPage() {
   return <BoardsManager />;
 }

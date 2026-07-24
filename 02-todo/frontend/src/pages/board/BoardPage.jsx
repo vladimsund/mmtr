@@ -1,5 +1,5 @@
-import { TaskManager } from "@/entities/task";
+import { TaskManager } from "@/widgets";
 
-export default function BoardPage() {
+export function BoardPage() {
   return <TaskManager />;
 }
