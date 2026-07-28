@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 
-import { useBoard } from "@/entities/board";
 import { useList } from "@/entities/list";
 import { TaskPanel, useTask } from "@/entities/task";
 import { Modal, Text } from "@/shared/ui";
@@ -15,26 +14,22 @@ export function TaskManager() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeListId, setActiveListId] = useState(null);
 
-  const board = useBoard();
   const list = useList(boardId);
   const task = useTask(boardId);
 
   useEffect(() => {
     const sync = async () => {
-      await board.handleFetch();
-      await list.handleFetch();
-    };
+      const freshLists = await list.handleFetch();
 
-    sync();
-  }, [boardId]);
-
-  useEffect(() => {
-    if (list.lists && list.lists.length > 0 && !list.isLoading) {
-      list.lists.forEach((l) => {
+      freshLists.forEach((l) => {
         task.handleFetch(l.id);
       });
+    };
+
+    if (boardId) {
+      sync();
     }
-  }, [list.isLoading]);
+  }, [boardId]);
 
   function openAddListModal() {
     setActiveListId(null);
@@ -62,6 +57,10 @@ export function TaskManager() {
     }
 
     closeModal();
+  }
+
+  if (list.idLoading || task.isLoading) {
+    return null;
   }
 
   let rightContent;

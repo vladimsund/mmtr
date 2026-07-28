@@ -10,7 +10,7 @@ export default function useList(boardId) {
   const isLoading = useSelector(isListsLoading);
 
   async function handleFetch() {
-    await dispatch(listApi.fetchLists({ boardId }));
+    return await dispatch(listApi.fetchLists({ boardId })).unwrap();
   }
 
   async function handleSave(name, boardId) {
