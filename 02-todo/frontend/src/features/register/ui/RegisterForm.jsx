@@ -1,10 +1,10 @@
 import { Field, Text, Button, ErrorForm } from "@/shared/ui";
 
-import useRegisterForm from "../model/useRegisterForm";
+import { useRegisterForm } from "../model/useRegisterForm";
 
 import styles from "./RegisterForm.module.css";
 
-export default function RegisterForm() {
+export function RegisterForm() {
   const {
     form,
     errors,

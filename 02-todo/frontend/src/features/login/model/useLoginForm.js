@@ -5,28 +5,15 @@ import { ROUTES, USER_ERRORS } from "@/shared";
 
 import { useUser } from "@/entities/user";
 
-export default function useRegistrationPage() {
+export function useLoginForm() {
   const navigate = useNavigate();
   const user = useUser();
 
   const [form, setForm] = useState({
-    name: "",
     email: "",
     password: "",
-    confirmPassword: "",
   });
-
-  const [errors, setErrors] = useState({
-    name: "",
-    email: "",
-    password: "",
-    api: "",
-  });
-
-  function handleChangeName(val) {
-    setForm((prev) => ({ ...prev, name: val }));
-    setErrors((prev) => ({ ...prev, name: "", api: "" }));
-  }
+  const [errors, setErrors] = useState({ email: "", password: "", api: "" });
 
   function handleChangeEmail(val) {
     setForm((prev) => ({ ...prev, email: val }));
@@ -42,29 +29,16 @@ export default function useRegistrationPage() {
     }));
   }
 
-  function handleChangeConfirm(val) {
-    setForm((prev) => ({ ...prev, confirmPassword: val }));
-    setErrors((prev) => ({ ...prev, api: "" }));
+  function handleNavigateTo() {
+    navigate(ROUTES.REGISTER);
   }
 
-  async function handleRegisterClick() {
+  async function handleLoginClick() {
     if (errors.email || errors.password || !form.email || !form.password) {
       return;
     }
 
-    if (form.password !== form.confirmPassword) {
-      setErrors((prev) => ({
-        ...prev,
-        api: USER_ERRORS.DIFFERENT_PASSWORDS,
-      }));
-      return;
-    }
-
-    const error = await user.handleRegister(
-      form.name,
-      form.email,
-      form.password,
-    );
+    const error = await user.handleLogin(form.email, form.password);
 
     if (!error) {
       navigate(ROUTES.BOARDS);
@@ -74,18 +48,12 @@ export default function useRegistrationPage() {
     setErrors((p) => ({ ...p, api: error }));
   }
 
-  function handleNavigateTo() {
-    navigate(ROUTES.AUTH);
-  }
-
   return {
     form,
     errors,
-    handleChangeName,
     handleChangeEmail,
     handleChangePassword,
-    handleChangeConfirm,
-    handleRegisterClick,
+    handleLoginClick,
     handleNavigateTo,
   };
 }

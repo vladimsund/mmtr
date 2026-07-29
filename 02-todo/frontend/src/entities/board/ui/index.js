@@ -1,3 +1,2 @@
 export { BoardLabel } from "./BoardLabel";
-
-export { BoardNavigation } from "./BoardNavigation";
+export { BoardCard } from "./BoardCard";

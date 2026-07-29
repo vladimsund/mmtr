@@ -1,5 +1,5 @@
-import { Field, Text, Button, ErrorForm } from "@/shared/ui";
-import { LoginForm } from "@/entities/user";
+import { Text } from "@/shared/ui";
+import { LoginForm } from "@/features/login";
 
 import styles from "./LoginPage.module.css";
 

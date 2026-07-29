@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 
-import { useBoard, BoardNavigation } from "@/entities/board";
 import { Text } from "@/shared/ui";
+import { useBoard } from "@/entities/board";
 import { CreateBoardModal } from "@/features/createBoard";
+import { BoardNavigation } from "@/features/boardNavigation";
 
 import styles from "./BoardsManager.module.css";
 

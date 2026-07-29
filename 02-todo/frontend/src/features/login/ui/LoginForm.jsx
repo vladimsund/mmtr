@@ -1,10 +1,10 @@
-import useAuthPage from "../model/useLoginForm";
+import { useLoginForm } from "../model/useLoginForm";
 
 import { Field, Text, Button, ErrorForm } from "@/shared/ui";
 
 import styles from "./LoginForm.module.css";
 
-export default function LoginForm() {
+export function LoginForm() {
   const {
     form,
     errors,
@@ -12,7 +12,7 @@ export default function LoginForm() {
     handleChangePassword,
     handleLoginClick,
     handleNavigateTo,
-  } = useAuthPage();
+  } = useLoginForm();
 
   return (
     <div className={styles.form}>

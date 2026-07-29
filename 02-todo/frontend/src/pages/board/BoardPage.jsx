@@ -1,5 +1,5 @@
-import { TaskManager } from "@/widgets";
+import { TasksListsManager } from "@/widgets";
 
 export function BoardPage() {
-  return <TaskManager />;
+  return <TasksListsManager />;
 }

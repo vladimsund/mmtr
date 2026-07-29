@@ -1,7 +1,5 @@
-import { useBoard } from "@/entities/board";
+import { useBoard, BoardCard } from "@/entities/board";
 import { Text } from "@/shared/ui";
-
-import { BoardCard } from "../BoardCard";
 
 import styles from "./BoardNavigation.module.css";
 

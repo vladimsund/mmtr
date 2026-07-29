@@ -1,5 +1,5 @@
-import { Field, Text, Button, ErrorForm } from "@/shared/ui";
-import { RegisterForm } from "@/entities/user";
+import { Text } from "@/shared/ui";
+import { RegisterForm } from "@/features/register";
 
 import styles from "./RegistrationPage.module.css";
 

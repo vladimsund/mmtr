@@ -4,11 +4,11 @@ import { useParams } from "react-router";
 import { useList } from "@/entities/list";
 import { TaskPanel, useTask } from "@/entities/task";
 import { Modal, Text } from "@/shared/ui";
-import { ListNavigation } from "@/widgets/listNavigation";
+import { ListNavigation } from "@/features/listNavigation";
 
-import styles from "./TaskManager.module.css";
+import styles from "./TasksListsManager.module.css";
 
-export function TaskManager() {
+export function TasksListsManager() {
   const { id: boardId } = useParams();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
