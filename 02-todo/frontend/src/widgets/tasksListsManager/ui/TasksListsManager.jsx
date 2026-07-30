@@ -21,8 +21,8 @@ export function TasksListsManager() {
     const sync = async () => {
       const freshLists = await list.handleFetch();
 
-      freshLists.forEach((l) => {
-        task.handleFetch(l.id);
+      await freshLists.forEach(async (l) => {
+        await task.handleFetch(l.id);
       });
     };
 
@@ -59,38 +59,21 @@ export function TasksListsManager() {
     closeModal();
   }
 
-  if (list.idLoading || task.isLoading) {
-    return null;
-  }
-
-  let rightContent;
-
-  if (isModalOpen) {
-    rightContent = (
-      <Modal
-        title={activeListId ? "Новая задача" : "Новый список"}
-        onClose={closeModal}
-        onSave={handleSave}
-      />
-    );
-  } else {
-    rightContent = <TaskPanel onAddTask={openAddTaskModal} />;
-  }
-
   return (
     <div className={styles.container}>
       <div className={styles.left}>
-        {list.isLoading ? (
-          <Text text="Загрузка списков..." className={styles.loaderLists} />
-        ) : (
-          <ListNavigation onAddList={openAddListModal} />
-        )}
+        <ListNavigation onAddList={openAddListModal} />
       </div>
       <div className={styles.right}>
-        {task.isLoading ? (
-          <Text text="Загрузка задач..." className={styles.loaderTasks} />
+        {isModalOpen ? (
+          <Modal
+            title={activeListId ? "Новая задача" : "Новый список"}
+            isOpen={isModalOpen}
+            onClose={closeModal}
+            onSave={handleSave}
+          />
         ) : (
-          rightContent
+          <TaskPanel onAddTask={openAddTaskModal} />
         )}
       </div>
     </div>

@@ -27,11 +27,7 @@ export function BoardsManager() {
   return (
     <div className={styles.container}>
       <div className={styles.left}>
-        {board.isLoading ? (
-          <Text text="Загрузка досок..." className={styles.loaderBoards} />
-        ) : (
-          <BoardNavigation onAddBoard={handleOpenModal} />
-        )}
+        <BoardNavigation onAddBoard={handleOpenModal} />
       </div>
       <div className={styles.right}>
         <CreateBoardModal
